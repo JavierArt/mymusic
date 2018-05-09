@@ -12,7 +12,7 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-image: url("https://k44.kn3.net/D/D/B/B/9/8/CF1.jpg");
+                background-color: #f2f2f2;
                 font-family: 'Raleway', sans-serif;
                 height: 100vh;
                 margin: 0;
@@ -47,9 +47,9 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: #8c8c8c;
                 padding: 0 25px;
-                font-size: 12px;
+                font-size: 15px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
