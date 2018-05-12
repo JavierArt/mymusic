@@ -1,0 +1,19 @@
+h1{
+  color: #949f4f;
+  padding: 0 25px;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: .3rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+th{
+  padding: 0 25px;
+  font-size: 15px;
+  font-weight: 600;
+}
+td{
+  padding: 0 25px;
+  font-size: 13px;
+  font-weight: 600;
+}

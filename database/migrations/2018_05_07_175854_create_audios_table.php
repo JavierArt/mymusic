@@ -15,9 +15,8 @@ class CreateAudiosTable extends Migration
     {
         Schema::create('audios', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('artistprofile_id');
-            $table->integer('origin_id')->unsigned();
-            $table->string('origin_type');
+            $table->Integer('artistprofile_id')->unsigned();
+            $table->foreign('artistprofile_id')->references('id')->on('artistprofiles');
             $table->string('original_name');
             $table->string('fs_name');            
             $table->string('mime',50);

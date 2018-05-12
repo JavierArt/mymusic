@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\audios;
+use App\Audio;
 use Illuminate\Http\Request;
 
 class AudiosController extends Controller
@@ -24,7 +24,7 @@ class AudiosController extends Controller
      */
     public function create()
     {
-        //
+        retun view('audios.uploadAudiosForm');
     }
 
     /**
@@ -35,7 +35,7 @@ class AudiosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request->file('audio');
     }
 
     /**
@@ -46,7 +46,7 @@ class AudiosController extends Controller
      */
     public function show(audios $audios)
     {
-        //
+
     }
 
     /**

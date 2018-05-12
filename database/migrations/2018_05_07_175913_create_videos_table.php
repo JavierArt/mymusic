@@ -15,10 +15,13 @@ class CreateVideosTable extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('artistprofile_id');
-            $table->string('name',50);
+            $table->Integer('artistprofile_id')->unsigned();
+            $table->foreign('artistprofile_id')->references('id')->on('artistprofiles');
+            $table->string('original_name');
+            $table->string('fs_name');            
             $table->string('mime',50);
-            $table->string('size',50);
+            $table->integer('size');
+            $table->string('directory');
             $table->timestamps();
         });
     }

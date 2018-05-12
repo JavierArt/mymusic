@@ -15,13 +15,15 @@ class CreateArtistprofilesTable extends Migration
     {
         Schema::create('artistprofiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->Integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('photo',10);
             $table->text('description');
             $table->string('musictype',50);
             $table->string('webpage',100);
             $table->string('contactemail',100);
             $table->string('artistname',100);
+            $table->softDeletes();
         });
     }
 

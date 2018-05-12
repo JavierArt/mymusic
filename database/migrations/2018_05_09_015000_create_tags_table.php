@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFutureventsTable extends Migration
+class CreateTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateFutureventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('futurevents', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->Integer('artistprofile_id')->unsigned();
-            $table->foreign('artistprofile_id')->references('id')->on('artistprofiles');
-            $table->text('place');
-            $table->text('date');
+            $table->string('name');
         });
     }
 
@@ -29,6 +26,6 @@ class CreateFutureventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('futurevents');
+        Schema::dropIfExists('tags');
     }
 }
