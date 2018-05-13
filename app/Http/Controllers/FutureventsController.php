@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\futurevents;
+use App\Artistprofile;
 use Illuminate\Http\Request;
 
 class FutureventsController extends Controller
@@ -12,9 +13,10 @@ class FutureventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+       $eventos = artistprofile::find($id)->events;
+       return view("eventos.events",compact('eventos'));
     }
 
     /**
@@ -24,7 +26,7 @@ class FutureventsController extends Controller
      */
     public function create()
     {
-        //
+        return view('eventos.dataeventsForm');
     }
 
     /**
@@ -33,9 +35,21 @@ class FutureventsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
-        //
+      $request ->validate([
+      'palce'=>'required',
+      'date'=>'required',
+      'hora'=>'required',
+    ]);
+     dd($id);
+/*    $data = $request->all();
+    $data['artistprofile_id'] = artistprofile::find($id)->id;
+    dd($data);
+    $add_event = new Futurevent($data);
+    $add_event->save();
+    \Session::flash('flash_message','el evento ha sido creado');*/
+    return redirect('/profiles');
     }
 
     /**

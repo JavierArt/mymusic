@@ -1,22 +1,14 @@
-@extends('layouts.app')
-@section('content')
-<div class="row">
-  <div class="col-md-12">
-    <h2>
-      Capturar informacion de perfil
-    </h2>
-  </div>
-</div>
+ @if($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+      @endif
+      {{ csrf_field() }}
 
-@include('layouts.errors'):
-
-    @if(!isset($Perprof))
-        {!! Form::open(['action' => 'ArtistprofileController@store']) !!}
-    vb
-    @else
-    velse
-          {{ Form::model($Perprof, array('route' => array('ArtistprofileController@update', $Perprof->id), 'method' => 'PUT')) }}
-    @endif
     
       <div class="form-group">
         <label for="photo">photo:</label>
@@ -51,6 +43,7 @@
       <button type="submit" class="btn btn-success">Aceptar</button>
       
     {!! Form::close() !!}
-
+  </div>
+</div>
 
 @endsection

@@ -9,8 +9,13 @@
     <h1>
       estos son los perfiles de los musicos
     </h1>
-    @foreach($profile as $prof)
+    @if(Session::has('flash_message'))
+      <div class="alert alert-success">
+        {{Session::get('flash_message')}}
+    </div>
+    @endif
     <div class="col-md-11">
+    @foreach($profile as $prof)
       <table class="table table-bordered">
           <thead>
             <tr>
@@ -24,6 +29,15 @@
             <td>{{ $prof->photo }}</td>
             <td><a href="/profile/{{ $prof->id }}">{{ $prof->artistname }}</a></td>
             <td>Genero:{{ $prof->musictype }}</td>
+            <td><a class="btn btn-warning" href="{{ URL::to('profile/' . $prof->id . '/edit') }}">Edit this profile</a></td>
+
+          <td>
+              {{ Form::open(array('url' => 'profile/{id}' . $prof->id, 'class' => 'pull-right')) }}
+                {{ csrf_field() }}
+                    {{ Form::hidden('_method', 'DELETE') }}
+                    {{ Form::submit('Delete this Profile', array('class' => 'btn btn-danger')) }}
+                {{ Form::close() }}
+            </td>
           </tr>
         </tbody>
         </div>

@@ -59,6 +59,7 @@ class ArtistprofileController extends Controller
     $data['user_id'] = Auth::user()->id;
     $add_profile = new artistprofile($data);
     $add_profile->save();
+    \Session::flash('flash_message','el perfil ha sido creado');
     return redirect('/profiles');
     }
 
@@ -80,9 +81,12 @@ class ArtistprofileController extends Controller
      * @param  \App\artistprofile  $artistprofile
      * @return \Illuminate\Http\Response
      */
-    public function edit(artistprofile $artistprofile)
+  //tengo que hacer edit  y update despues
+    public function edit($id)
     {
-        //
+        $Profi = artistprofile::find($id)->toArray();        
+        // show the edit form and pass the nerd
+        return view('profiles.dataprofileForm',compact('Profi'));
     }
 
     /**
@@ -92,9 +96,22 @@ class ArtistprofileController extends Controller
      * @param  \App\artistprofile  $artistprofile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, artistprofile $artistprofile)
+    public function update($id)
     {
-        //
+      $request ->validate([
+      'description'=>'required',
+      'musictype'=>'required',
+      'contactemail'=>'required',
+      'artistname'=>'required'
+    ]);
+
+        $atu = artistprofile::find($id);
+        $atu = $request->all();
+        $atu['user_id'] = Auth::user()->id;
+        $atu->save();
+        // redirect
+        Session::flash('message', 'Successfully updated nerd!');
+        return Redirect('profiles');
     }
 
     /**
@@ -103,9 +120,13 @@ class ArtistprofileController extends Controller
      * @param  \App\artistprofile  $artistprofile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(artistprofile $artistprofile)
+    public function destroy($id)
     {
-        //
+        $Perprof = artistprofile::find($id);
+        $Perprof->delete();
+      // redirect
+        Session::flash('message', 'Successfully deleted the the profile!');
+        return Redirect('/profiles');
     }
     
  /*   //aun debo implementar pero no es prioridad

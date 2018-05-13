@@ -22,7 +22,7 @@
             .top-right {
                 position: absolute;
                 right: 10px;
-                top: 18px;
+                top: 7px;
             }
 
             .content {
@@ -44,7 +44,7 @@
             }
 
             .m-b-md {
-                margin-bottom: 420px;
+                margin-bottom: 400px;
                 color: #000000;
                 font-size: 70px;
             }

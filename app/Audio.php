@@ -17,6 +17,6 @@ class Audio extends Model
     }
     public function tags()
     {
-      return $this->morphToMany('App\tag','taggable')
+      return $this->morphToMany('App\tag','taggable');
     }
 }

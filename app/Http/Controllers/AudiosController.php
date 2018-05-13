@@ -3,83 +3,80 @@
 namespace App\Http\Controllers;
 
 use App\Audio;
+use App\Artistprofile;
 use Illuminate\Http\Request;
 
 class AudiosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  public function index($id)
+  {
+     $audios = artistprofile::find($id)->audio;
+     return view("audios.audio",compact('audios'));
+  }
     public function create()
     {
-        retun view('audios.uploadAudiosForm');
+         return view('audios.uploadAudioForm');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    
+  public function store(request $request)
+  {
+    return $request->file("audio");
+  }
+  
+  /*  public function store(Request $request)
     {
-        return $request->file('audio');
+        $request->file('archivos');
+        $archivo = $request->file('archivos');
+        $nombreOriginal = $archivo->getClientOriginalName();
+        $size = $archivo->getClientSize();
+        $mime = $archivo->getMimeType();
+      
+        if ($request->hasFile('archivos')) {
+            $fs_name = $request->archivos->store('');
+           
+            Archivo::create([
+              'origen_id' => $request->input('origen_id'),
+              'original_name' => $nombreOriginal,
+              'fs_name' => $fs_name,
+              'mime' => $mime,
+              'size' => $size,
+              'directorio' => ''
+            ]);
+        }
+      
+         return redirect()->back()
+          ->with([
+            'message' => 'Archivo cargado con éxito',
+            'alert-class' => 'alert-success'
+          ]);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\audios  $audios
-     * @return \Illuminate\Http\Response
-     */
-    public function show(audios $audios)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\audios  $audios
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(audios $audios)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\audios  $audios
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, audios $audios)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\audios  $audios
-     * @return \Illuminate\Http\Response
-     */
+/*
     public function destroy(audios $audios)
     {
-        //
+        if (\Storage::exists($archivo->fs_name)) {
+            \Storage::delete($archivo->fs_name);
+            $archivo->delete();
+        } else {
+            return redirect()->back()->with([
+            'message' => 'NO SE ENCONTRÓ ARCHIVO',
+            'alert-class' => 'alert-danger'
+          ]);
+        }
+        
+        return redirect()->back()->with([
+            'message' => 'Archivo borrado con éxito',
+            'alert-class' => 'alert-warning'
+          ]);
     }
+    
+    public function descarga(audios $audios)
+    {
+     if (\Storage::exists($archivo->fs_name)) {
+          $headers = ['Content-Type' => $archivo->mime];
+          return \Storage::download($archivo->fs_name, $archivo->original_name, $headers);
+      } 
+      else {
+          return redirect()->back();
+      }
+    }*/
 }

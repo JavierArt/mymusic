@@ -7,7 +7,6 @@
   </head>
   <body background-color: #fff;>
     <div class="col-sm-4">     
-      <h1>Perfil de {{ $Perprof->artistname}}</h1>
       <table class="table">
           <thead class="table-light">
             <tr>
@@ -15,6 +14,9 @@
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td>{{ $Perprof->artistname}}</td>
+            </tr>
             <tr>
               <td>{{ $Perprof->description }}</td>
             </tr>
@@ -29,12 +31,21 @@
             </tr>
           </tbody>
       </table>
-      </div>
-
-      <a href="/profile/{{$Perprof}}/audios" class="btn btn-primary">audios</a>
-      <a href="/profile/{{$Perprof}}/videos" class="btn btn-secondary">videos</a>
-      <a href="/profile/{{$Perprof}}/events" class="btn btn-danger">eventos</a>
-
+     <div class="btn-group" role="group" aria-label="Basic example">
+      <a href="{{$Perprof->id}}/audios/create" class="btn btn-dark">añadir audio al perfil</a>
+      <a href="{{$Perprof->id}}/videos" class="btn btn-info">añadir video al perfil</a>
+      <a href="{{$Perprof->id}}/events/create" class="btn btn-success">añadir eventos al perfil</a>
+    </div>
+    </div>
+    <br>
+    <div class="col-sm-4">
+     <div class="btn-group" role="group" aria-label="Basic example">
+      <a href="{{$Perprof->id}}/audios" class="btn btn-primary">audios</a>
+      <a href="{{$Perprof->id}}/videos" class="btn btn-secondary">videos</a>
+      <a href="{{$Perprof -> id}}/events" class="btn btn-danger">eventos</a>
+    </div>
+    </div>
+      
   </body>
 </html>
 @endsection
