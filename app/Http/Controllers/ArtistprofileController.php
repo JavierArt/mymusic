@@ -18,6 +18,7 @@ class ArtistprofileController extends Controller
     public function __construct()
     {
       $this->middleware('auth')->except(['index', 'show']);
+      $this->middleware('minage')->only(['create','store']);
     }
   
     /**
@@ -84,9 +85,9 @@ class ArtistprofileController extends Controller
   //tengo que hacer edit  y update despues
     public function edit($id)
     {
-        $Profi = artistprofile::find($id)->toArray();        
+        $Profile = artistprofile::find($id);        
         // show the edit form and pass the nerd
-        return view('profiles.dataprofileForm',compact('Profi'));
+        return view('profiles.editdataprofileForm',compact('Profi'));
     }
 
     /**
@@ -110,7 +111,7 @@ class ArtistprofileController extends Controller
         $atu['user_id'] = Auth::user()->id;
         $atu->save();
         // redirect
-        Session::flash('message', 'Successfully updated nerd!');
+        Session::flash('flash_message', 'Successfully updated profile!');
         return Redirect('profiles');
     }
 
@@ -125,11 +126,11 @@ class ArtistprofileController extends Controller
         $Perprof = artistprofile::find($id);
         $Perprof->delete();
       // redirect
-        Session::flash('message', 'Successfully deleted the the profile!');
+        Session::flash('flash_message', 'Successfully deleted the the profile!');
         return Redirect('/profiles');
     }
     
- /*   //aun debo implementar pero no es prioridad
+    //aun debo implementar pero no es prioridad
     public function myownprofile($Owprofile)
     {
       //objeto usuario logeado
@@ -140,5 +141,5 @@ class ArtistprofileController extends Controller
       $Ownprofile = artistprofile::find($OwID);
            
       return view("profiles.personalprofile",compact('Ownprofile'));
-    }*/
+    }
 }

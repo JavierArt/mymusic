@@ -29,13 +29,12 @@
             <td>{{ $prof->photo }}</td>
             <td><a href="/profile/{{ $prof->id }}">{{ $prof->artistname }}</a></td>
             <td>Genero:{{ $prof->musictype }}</td>
-            <td><a class="btn btn-warning" href="{{ URL::to('profile/' . $prof->id . '/edit') }}">Edit this profile</a></td>
+            <td><a class="btn btn-warning" href="{{ URL::to('profile/' . $prof->id . '/edit') }}">Editar este perfil</a></td>
 
           <td>
-              {{ Form::open(array('url' => 'profile/{id}' . $prof->id, 'class' => 'pull-right')) }}
-                {{ csrf_field() }}
+              {{ Form::open(array('url' => 'profile/' . $prof->id, 'class' => 'pull-right')) }}
                     {{ Form::hidden('_method', 'DELETE') }}
-                    {{ Form::submit('Delete this Profile', array('class' => 'btn btn-danger')) }}
+                    {{ Form::submit('Borrar este perfil', array('class' => 'btn btn-danger')) }}
                 {{ Form::close() }}
             </td>
           </tr>

@@ -38,7 +38,7 @@ class FutureventsController extends Controller
     public function store(Request $request,$id)
     {
       $request ->validate([
-      'palce'=>'required',
+      'place'=>'required',
       'date'=>'required',
       'hora'=>'required',
     ]);

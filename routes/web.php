@@ -28,6 +28,9 @@ Route::get('/profile/create', 'ArtistprofileController@create');
 Route::post('/profile', 'ArtistprofileController@store');
 Route::get('/profile/{Perprof}', 'ArtistprofileController@show');
 Route::get('/profile/{Perprof}/edit', 'ArtistprofileController@edit');
+Route::post('/profile/{Perprof}/edit', 'ArtistprofileController@update');
+
+//Route::resource('profiles', 'ArtistprofileController');
 /*
 Route::put('/profile/{Perprof}', 'ArtistprofileController@update');
 Route::resource('artistprofile', 'ArtistprofileController', ['only' => ['destroy']]);
@@ -44,11 +47,14 @@ Route::resource('archivo', 'VideosController', ['only' => ['store', 'destroy']])
 */
 Route::get('/profile/{Perprof}/events','FutureventsController@index');
 Route::get('/profile/{Perprof}/events/create','FutureventsController@create');
-//Route::post('/profile/{Perprof}/events','FutureventsController@store');
+Route::post('/profile/{Perprof}/events','FutureventsController@store');
 
 //luego los muestro
 Route::get('/profile/{Perprof}/audios','AudiosController@index');
 Route::get('/profile/{Perprof}/audios/create','AudiosController@create');
 Route::post('/profile/{Perprof}/audios/s','AudiosController@store');
+
+//luego lo muestro y subo
+Route::get('/profile/{Perprof}/videos','VideosController@index');
 
 

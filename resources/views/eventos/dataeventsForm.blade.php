@@ -9,19 +9,19 @@
 </div>
 
 @include('layouts.errors'):
-      {{ csrf_field() }}
+      {!! Form::open(['action' => 'FutureventsController@store']) !!}
       <div class="form-group">
-        <label for="place">lugar:</label>
+        {{ Form::label('place', 'lugar') }}
         {!! Form::text('place', null, ['placeholder' => 'lugar donde sera el evento', 'class' => 'form-control','required']) !!}
       </div>
       
       <div class="form-group">
-        <label for="date">fecha:</label>
+        {{ Form::label('date', 'fecha') }}
         {!! Form::text('date', null, ['placeholder' => 'cuando sera el evento?', 'class' => 'form-control','required']) !!}
       </div>
     
       <div class="form-group">
-        <label for="hora">hora:</label>
+        {{ Form::label('hora', 'hora del evento') }}
         {!! Form::text('hora', null, ['placeholder' => 'a que hora sera el evento', 'class' => 'form-control', 'required']) !!}
       </div>
                   

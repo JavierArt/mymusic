@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\videos;
+use App\Artistprofile;
 use Illuminate\Http\Request;
 
 class VideosController extends Controller
 {
-
+  public function index($id)
+  {
+     $videos = artistprofile::find($id)->audio;
+     return view("videos.video",compact('videos'));
+  }
     public function store(Request $request)
     {
         $request->file('archivos');

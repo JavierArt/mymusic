@@ -7,7 +7,7 @@
   </head>
   <body background-color: #fff;>
     <h1>
-      estos son los eventos del perfil
+      eventos del perfil
     </h1>
     @if(Session::has('flash_message'))
       <div class="alert alert-success">

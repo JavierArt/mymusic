@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="{{ URL::asset('css/general.css') }}" type="text/css">
   </head>
   <body background-color: #fff;>
+    @if(Session::has('flash_message'))
+      <div class="alert alert-success">
+        {{Session::get('flash_message')}}
+    </div>
+    @endif
     <div class="col-sm-4">     
       <table class="table">
           <thead class="table-light">

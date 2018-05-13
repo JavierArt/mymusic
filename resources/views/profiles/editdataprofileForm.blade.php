@@ -9,10 +9,12 @@
 </div>
 
 @include('layouts.errors'):
-      {!! Form::open(['action' => 'ArtistprofileController@store']) !!}
+
+   {{ Form::model($atu, array('action' => array('NerdController@update', $atu->id), 'method' => 'PUT')) }}
+
       <div class="form-group">
         {{ Form::label('photo', 'foto de perfil') }}
-        {!! Form::text('photo',null, ['placeholder' => 'aqui podras subir una foto en un futuro?', 'class' => 'form-control','required']) !!}
+        {!! Form::text('photo', null, ['placeholder' => 'aqui podras subir una foto en un futuro?', 'class' => 'form-control','required']) !!}
       </div>
       
       <div class="form-group">
@@ -31,7 +33,7 @@
       </div>
     
       <div class="form-group">
-        {{ Form::label('contactemail', 'correo') }}
+         {{ Form::label('contactemail', 'correo de contact') }}
         {!! Form::text('contactemail', null, ['placeholder' => 'Correo para contacto', 'class' => 'form-control', 'required']) !!}
       </div>
       
@@ -39,7 +41,8 @@
          {{ Form::label('artistname', 'nombre artistico') }}
         {!! Form::text('artistname', null, ['placeholder' => 'nombre artistico', 'class' => 'form-control', 'required']) !!}
       </div>
-        {{ Form::submit('Aceptar', array('class' => 'btn btn-success')) }}
+            
+      {{ Form::submit('editar este perfil', array('class' => 'btn btn-success')) }}
       
     {!! Form::close() !!}
 
