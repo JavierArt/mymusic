@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Audio extends Model
 {
-    protected $fillable = ['artistprofile_id', 'original_name', 'fs_name', 'mime', 'size', 'directorio'];
+    protected $fillable = ['artistprofile_id', 'original_name', 'fs_name', 'mime', 'size', 'directory'];
     public function profile()
     {
       $this->belongsto('App\Artistprofile');
@@ -19,4 +19,5 @@ class Audio extends Model
     {
       return $this->morphToMany('App\tag','taggable');
     }
+  public $table = "audios";
 }

@@ -12,9 +12,33 @@
         {{Session::get('flash_message')}}
     </div>
     @endif
-    <h1>
-      audios del perfil
-    </h1>
-  </body>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Archivo</th>
+          <th>Tamaño</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($audios as $archivo)
+          <tr>
+            <td>{{ $archivo->original_name }}</td>
+            <td>{{ $archivo->size }}</td>
+            <td>
+              <a href="{{ route('descarga', $archivo->id) }}" class="btn btn-sm btn-info">Descargar</a>
+              {!! Form::open(['route' => ['audios.destroy', $archivo->id], 'method' => 'DELETE']) !!}
+                {!! Form::submit('Borrar', ['class' => 'btn btn-sm btn-danger']) !!}
+              {!! Form::close() !!}
+            </td>
+          </tr>
+        @endforeach
+      </tbody>
+    </table>
+</body>
 </html>
 @endsection
+
+
+
+

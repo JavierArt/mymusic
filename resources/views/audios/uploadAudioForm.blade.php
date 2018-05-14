@@ -7,15 +7,18 @@
   </head>
   <body>
     <br>
+     @if(Session::has('flash_message'))
+      <div class="alert alert-success">
+        {{Session::get('flash_message')}}
+    </div>
+    @endif
 <div class="row">
   <div class="col-md-12">     
     <h1>Upload an audio for the profile</h1>
-      <form action="/profile/{{Perprof}}/audios/s" enctype="multipart/form-data" method="POST">
-        {{ csrf_field() }}
-        <input type="file" name="audio" class="btn btn-outline-primary">
-        <br>
-        <input type="submit" value="Upload" class="btn btn-outline-success">
-      </form>
+      {!! Form::open(['route' => ['audios.store'], 'files' => 'true']) !!}
+      {!! Form::file('audio') !!}
+      {!! Form::submit('Cargar Archivos', ['class' => 'btn btn-success']) !!}
+      {!! Form::close() !!}
     </div>
     </div>
   </body>

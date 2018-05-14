@@ -131,6 +131,7 @@ class ArtistprofileController extends Controller
     }
     
     //aun debo implementar pero no es prioridad
+  /*
     public function myownprofile($Owprofile)
     {
       //objeto usuario logeado
@@ -141,5 +142,5 @@ class ArtistprofileController extends Controller
       $Ownprofile = artistprofile::find($OwID);
            
       return view("profiles.personalprofile",compact('Ownprofile'));
-    }
+    }*/
 }

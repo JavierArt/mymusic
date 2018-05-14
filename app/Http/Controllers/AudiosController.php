@@ -10,7 +10,8 @@ class AudiosController extends Controller
 {
   public function index($id)
   {
-     $audios = artistprofile::find($id)->audio;
+    $audios = Audio::all()->where('artistprofile_id',$id);
+     //$audios = artistprofile::find($id)->audio;
      return view("audios.audio",compact('audios'));
   }
     public function create()
@@ -20,38 +21,30 @@ class AudiosController extends Controller
     
   public function store(request $request)
   {
-    return $request->file("audio");
-  }
-  
-  /*  public function store(Request $request)
-    {
-        $request->file('archivos');
-        $archivo = $request->file('archivos');
-        $nombreOriginal = $archivo->getClientOriginalName();
-        $size = $archivo->getClientSize();
-        $mime = $archivo->getMimeType();
-      
-        if ($request->hasFile('archivos')) {
-            $fs_name = $request->archivos->store('');
-           
-            Archivo::create([
-              'origen_id' => $request->input('origen_id'),
+    $archivo = $request->file('audio');
+    $nombreOriginal = $archivo->getClientOriginalName();
+    $size = $archivo->getClientSize();
+    $mime = $archivo->getMimeType();
+    $id=artistprofile::find(3)->id;
+    if ($request->hasFile('audio')) {
+          $fs_name = $request->audio->store('');
+           Audio::create([
+              'artistprofile_id' => $id,
               'original_name' => $nombreOriginal,
               'fs_name' => $fs_name,
               'mime' => $mime,
               'size' => $size,
-              'directorio' => ''
+              'directory' => ''
             ]);
-        }
-      
-         return redirect()->back()
+    }
+     return redirect()->back()
           ->with([
             'message' => 'Archivo cargado con éxito',
             'alert-class' => 'alert-success'
           ]);
-    }
-/*
-    public function destroy(audios $audios)
+  }
+  
+   public function destroy(audios $archivo)
     {
         if (\Storage::exists($archivo->fs_name)) {
             \Storage::delete($archivo->fs_name);
@@ -68,15 +61,14 @@ class AudiosController extends Controller
             'alert-class' => 'alert-warning'
           ]);
     }
-    
-    public function descarga(audios $audios)
+  
+    public function descarga(audios $archivo)
     {
      if (\Storage::exists($archivo->fs_name)) {
           $headers = ['Content-Type' => $archivo->mime];
           return \Storage::download($archivo->fs_name, $archivo->original_name, $headers);
-      } 
-      else {
+      } else {
           return redirect()->back();
       }
-    }*/
+    }
 }
