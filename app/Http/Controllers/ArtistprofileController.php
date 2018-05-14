@@ -28,6 +28,10 @@ class ArtistprofileController extends Controller
      */
     public function index()
     {
+         /*$profile = Artistprofile::whereHas(['User' => function ($query) {
+            $query->where('User->name', 'pepe');
+          }])->get();*/
+        //$profile = Artistprofile::with('User')->get();        <--!--td>{{ $prof->User->name}}</td--!-->
         $profile = artistprofile::all();
         return view('profiles.profile',compact('profile'));
     }
