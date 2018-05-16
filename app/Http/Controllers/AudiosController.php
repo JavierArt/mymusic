@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Audio;
 use App\Artistprofile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AudiosController extends Controller
 {
-  public function index($id)
+  public function audiosfromprofile($id)
   {
-    $audios = Audio::all()->where('artistprofile_id',$id);
+     $audios = Audio::all()->where('artistprofile_id',$id);
      //$audios = artistprofile::find($id)->audio;
      return view("audios.audio",compact('audios'));
   }
@@ -19,13 +20,13 @@ class AudiosController extends Controller
          return view('audios.uploadAudioForm');
     }
     
-  public function store(request $request)
+  public function store(request $request)//$id
   {
     $archivo = $request->file('audio');
     $nombreOriginal = $archivo->getClientOriginalName();
     $size = $archivo->getClientSize();
     $mime = $archivo->getMimeType();
-    $id=artistprofile::find(3)->id;
+    $id=artistprofile::find(9)->id;
     if ($request->hasFile('audio')) {
           $fs_name = $request->audio->store('');
            Audio::create([
@@ -37,37 +38,34 @@ class AudiosController extends Controller
               'directory' => ''
             ]);
     }
-     return redirect()->back()
-          ->with([
-            'message' => 'Archivo cargado con éxito',
-            'alert-class' => 'alert-success'
-          ]);
+            \Session::flash('flash_message','Archivo a sido cargado con exito');
+              return redirect()->back();
   }
   
-   public function destroy(audios $archivo)
+   public function destroy(Audio $archivo)
     {
-        if (\Storage::exists($archivo->fs_name)) {
+        if (Storage::exists($archivo->fs_name)) {
             \Storage::delete($archivo->fs_name);
-            $archivo->delete();
-        } else {
-            return redirect()->back()->with([
-            'message' => 'NO SE ENCONTRÓ ARCHIVO',
-            'alert-class' => 'alert-danger'
-          ]);
+             $archivo->delete();
+         dd($archivo); 
         }
-        
-        return redirect()->back()->with([
-            'message' => 'Archivo borrado con éxito',
-            'alert-class' => 'alert-warning'
-          ]);
+     else {
+       dd($archivo); 
+          \Session::flash('flash_message','NO SE ENCONTRO ARCHIVO');
+              return redirect()->back();
+          return $archivo;
+        }
+        \Session::flash('flash_message','Archivo borrado con exito');
+           return redirect()->back();                 
     }
   
-    public function descarga(audios $archivo)
+    public function descarga(Audio $archivo)
     {
      if (\Storage::exists($archivo->fs_name)) {
           $headers = ['Content-Type' => $archivo->mime];
           return \Storage::download($archivo->fs_name, $archivo->original_name, $headers);
       } else {
+          \Session::flash('flash_message','NO SE ENCONTRO ARCHIVO');
           return redirect()->back();
       }
     }

@@ -16,7 +16,8 @@
       <thead>
         <tr>
           <th>Archivo</th>
-          <th>Tamaño</th>
+          <th>fecha de creacion</th>
+          <th>tamaño</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -24,10 +25,11 @@
         @foreach($audios as $archivo)
           <tr>
             <td>{{ $archivo->original_name }}</td>
+            <td>{{ $archivo->created_at->toFormattedDateString() }}</td>
             <td>{{ $archivo->size }}</td>
             <td>
               <a href="{{ route('descarga', $archivo->id) }}" class="btn btn-sm btn-info">Descargar</a>
-              {!! Form::open(['route' => ['audios.destroy', $archivo->id], 'method' => 'DELETE']) !!}
+              {!! Form::open(['route' => ['audio.destroy', $archivo->id], 'method' => 'DELETE']) !!}
                 {!! Form::submit('Borrar', ['class' => 'btn btn-sm btn-danger']) !!}
               {!! Form::close() !!}
             </td>

@@ -10,7 +10,7 @@
 
 @include('layouts.errors'):
 
-   {{ Form::model($atu, array('action' => array('NerdController@update', $atu->id), 'method' => 'PUT')) }}
+   {!! Form::open(['action' => 'ArtistprofileController@edit']) !!}
 
       <div class="form-group">
         {{ Form::label('photo', 'foto de perfil') }}

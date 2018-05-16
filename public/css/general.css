@@ -11,9 +11,11 @@ th{
   padding: 0 25px;
   font-size: 15px;
   font-weight: 600;
+  font-style:bolder;
 }
 td{
   padding: 0 25px;
   font-size: 13px;
   font-weight: 600;
+  font-style:italic;
 }

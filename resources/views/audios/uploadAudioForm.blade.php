@@ -15,7 +15,7 @@
 <div class="row">
   <div class="col-md-12">     
     <h1>Upload an audio for the profile</h1>
-      {!! Form::open(['route' => ['audios.store'], 'files' => 'true']) !!}
+      {!! Form::open(['route' => ['audio.store'], 'files' => 'true']) !!}
       {!! Form::file('audio') !!}
       {!! Form::submit('Cargar Archivos', ['class' => 'btn btn-success']) !!}
       {!! Form::close() !!}

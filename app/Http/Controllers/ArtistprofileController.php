@@ -28,12 +28,15 @@ class ArtistprofileController extends Controller
      */
     public function index()
     {
-         /*$profile = Artistprofile::whereHas(['User' => function ($query) {
-            $query->where('User->name', 'pepe');
-          }])->get();*/
-        //$profile = Artistprofile::with('User')->get();        <--!--td>{{ $prof->User->name}}</td--!-->
-        $profile = artistprofile::all();
+        //contraining eager load
+        /*$profile = Artistprofile::with(['User' => function ($query) {
+            $query->whereColumn('age', '>=', 18);
+        }])->get();*/
+        //eager loading
+        $profile = Artistprofile::with('User')->get();        //<--!--td>{{ $prof->User->name}}</td--!-->
+        //$profile = artistprofile::all();
         return view('profiles.profile',compact('profile'));
+     
     }
 
     /**
@@ -57,7 +60,7 @@ class ArtistprofileController extends Controller
       $request ->validate([
       'description'=>'required',
       'musictype'=>'required',
-      'contactemail'=>'required',
+      'contactemail'=>'required|email',
       'artistname'=>'required'
     ]);
     $data = $request->all();
@@ -89,9 +92,7 @@ class ArtistprofileController extends Controller
   //tengo que hacer edit  y update despues
     public function edit($id)
     {
-        $Profile = artistprofile::find($id);        
-        // show the edit form and pass the nerd
-        return view('profiles.editdataprofileForm',compact('Profi'));
+        return view('profiles.editdataprofileForm');
     }
 
     /**
@@ -115,8 +116,9 @@ class ArtistprofileController extends Controller
         $atu['user_id'] = Auth::user()->id;
         $atu->save();
         // redirect
-        Session::flash('flash_message', 'Successfully updated profile!');
+        \Session::flash('flash_message', 'Successfully updated profile!');
         return Redirect('profiles');
+ 
     }
 
     /**
@@ -130,7 +132,7 @@ class ArtistprofileController extends Controller
         $Perprof = artistprofile::find($id);
         $Perprof->delete();
       // redirect
-        Session::flash('flash_message', 'Successfully deleted the the profile!');
+        \Session::flash('flash_message', 'Perfil borrado con exito!');
         return Redirect('/profiles');
     }
     

@@ -11,6 +11,8 @@ class Artistprofile extends Model
 {
     public $timestamps = false;
     use Notifiable;
+    use SoftDeletes;
+   
     public function User()
     {
         return $this->belongsTo('App\User');
@@ -38,8 +40,8 @@ class Artistprofile extends Model
       $this->attributes['artistname'] = ucfirst(strtolower($value));
     }
     //accesor
-    public function getLoggedProfile()
+    public function getMusicTypeAttribute($value)
     {
-         return $this->artistname. '('.  $this->musictype. $this->contactemail.')';
+        return ucfirst(strtolower($value));
     }
 }

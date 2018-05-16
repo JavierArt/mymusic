@@ -29,6 +29,7 @@ Route::post('/profile', 'ArtistprofileController@store');
 Route::get('/profile/{Perprof}', 'ArtistprofileController@show');
 Route::get('/profile/{Perprof}/edit', 'ArtistprofileController@edit');
 Route::post('/profile/{Perprof}/edit', 'ArtistprofileController@update');
+Route::resource('profileD', 'ArtistprofileController', ['only' => ['destroy']]);
 
 //Route::resource('profiles', 'ArtistprofileController');
 /*
@@ -50,11 +51,11 @@ Route::get('/profile/{Perprof}/events/create','FutureventsController@create');
 Route::post('/profile/{Perprof}/events','FutureventsController@store');
 **/
 //luego lo muestro y subo
-Route::get('/profile/{Perprof}/audios','AudiosController@index');
+Route::get('/profile/{Perprof}/audios','AudiosController@audiosfromprofile');
 Route::get('/profile/{Perprof}/audios/create','AudiosController@create');
 Route::get('descarga/{archivo}', 'AudiosController@descarga')->name('descarga');
-Route::resource('audios', 'AudiosController', ['only' => ['store', 'destroy']]);
-//Route::post('profile/{Perprof}/audios/create', 'AudiosController@store');
+Route::resource('audio', 'AudiosController', ['only' => ['store', 'destroy']]);
+//Route::post('profile/{Perprof}/audios/create/', 'AudiosController@store');
 //Route::post('archivo/{Perprof}', 'AudiosController@destroy');
 
 
