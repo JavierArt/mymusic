@@ -1,10 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="viewport" content="width=device-width, user-scalable=no">
         <title>Music index</title>
 
         <!-- Fonts -->
@@ -13,7 +11,7 @@
         <link rel="stylesheet" href="{{ URL::asset('css/welcome.css') }}" type="text/css">
       <style>
             html, body {
-                background-color: #f2f2f2;
+                background-image: url('https://png.pngtree.com/thumb_back/fw800/back_pic/04/61/60/80586e690a8dcab.jpg');
                 font-family: 'Raleway', sans-serif;
                 height: 100vh;
                 margin: 0;
@@ -39,9 +37,9 @@
                     Talentosos musicos mostrando su trabajo
                </div>
                <div class="title m-b-md2">
-                    inicia sesion para crear tu perfil
+                    Registrate para crear tu perfil
                </div> 
-              <a href="/profiles" class="btn btn-outline-primary">visitar perfiles</a>
+              <a href="/profiles" class="btn btn-outline-primary btn-lg">visitar perfiles</a>
           </div>
       </div>
     </body>

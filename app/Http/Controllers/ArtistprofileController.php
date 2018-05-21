@@ -6,7 +6,6 @@ use App\Artistprofile;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-//use Illuminate\view\Middleware\ShareErrorsFromSession;
 
 class ArtistprofileController extends Controller
 {
@@ -29,12 +28,11 @@ class ArtistprofileController extends Controller
     public function index()
     {
         //contraining eager load
-        /*$profile = Artistprofile::with(['User' => function ($query) {
-            $query->whereColumn('age', '>=', 18);
+        /*$profile = Artistprofile::with(['User' => function ($query) {            
+          $query->where('age', '>=', 18 );
         }])->get();*/
         //eager loading
-        $profile = Artistprofile::with('User')->get();        //<--!--td>{{ $prof->User->name}}</td--!-->
-        //$profile = artistprofile::all();
+        $profile = Artistprofile::with('User')->get();
         return view('profiles.profile',compact('profile'));
      
     }
@@ -65,7 +63,7 @@ class ArtistprofileController extends Controller
     ]);
     $data = $request->all();
     $data['user_id'] = Auth::user()->id;
-    $add_profile = new artistprofile($data);
+    $add_profile = new Artistprofile($data);
     $add_profile->save();
     \Session::flash('flash_message','el perfil ha sido creado');
     return redirect('/profiles');
@@ -79,7 +77,7 @@ class ArtistprofileController extends Controller
      */
     public function show($Perprof)
     {
-        $Perprof=artistprofile::find($Perprof);
+        $Perprof=Artistprofile::find($Perprof);
         return view("profiles.personalprofile",compact('Perprof'));
     }
 
@@ -111,7 +109,7 @@ class ArtistprofileController extends Controller
       'artistname'=>'required'
     ]);
 
-        $atu = artistprofile::find($id);
+        $atu = Artistprofile::find($id);
         $atu = $request->all();
         $atu['user_id'] = Auth::user()->id;
         $atu->save();
@@ -129,7 +127,7 @@ class ArtistprofileController extends Controller
      */
     public function destroy($id)
     {
-        $Perprof = artistprofile::find($id);
+        $Perprof = Artistprofile::find($id);
         $Perprof->delete();
       // redirect
         \Session::flash('flash_message', 'Perfil borrado con exito!');

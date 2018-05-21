@@ -12,12 +12,12 @@
         {{Session::get('flash_message')}}
     </div>
     @endif
+    <div class="col-md-8">
     <table class="table">
       <thead>
         <tr>
           <th>Archivo</th>
           <th>fecha de creacion</th>
-          <th>tamaño</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -26,7 +26,6 @@
           <tr>
             <td>{{ $archivo->original_name }}</td>
             <td>{{ $archivo->created_at->toFormattedDateString() }}</td>
-            <td>{{ $archivo->size }}</td>
             <td>
               <a href="{{ route('descarga', $archivo->id) }}" class="btn btn-sm btn-info">Descargar</a>
               {!! Form::open(['route' => ['audio.destroy', $archivo->id], 'method' => 'DELETE']) !!}
@@ -36,6 +35,7 @@
           </tr>
         @endforeach
       </tbody>
+      </div>
     </table>
 </body>
 </html>

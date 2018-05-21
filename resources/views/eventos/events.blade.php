@@ -15,23 +15,25 @@
     </div>
     @endif
     <div class="col-md-8">
-    @foreach($eventos as $event)
       <table class="table">
-          <thead class="thead-dark">
+          <thead>
             <tr>
-              <th scope="col">lugar</th>
-              <th scope="col">fecha</th>
+              <th scope="col">Lugar</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Hora</th>
             </tr>
           </thead>
         <tbody>
+          @foreach($eventos as $event)
           <tr>
             <td>{{ $event->place }}</td>
-            <td>Genero:{{ $event->date }}</td>
+            <td>{{ $event->date }}</td>
+            <td>{{ $event->hora }}</td>
           </tr>
+          @endforeach
         </tbody>
         </div>
-      </table>
-   @endforeach
+      </table>   
   </body>
 </html>
 @endsection

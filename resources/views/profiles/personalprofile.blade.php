@@ -38,7 +38,7 @@
       </table>
      <div class="btn-group" role="group" aria-label="Basic example">
       <a href="{{$Perprof->id}}/audios/create" class="btn btn-dark">añadir audio al perfil</a>
-      <a href="{{$Perprof->id}}/videos" class="btn btn-info">añadir video al perfil</a>
+      <a href="{{$Perprof->id}}/videos/create" class="btn btn-info">añadir video al perfil</a>
       <a href="{{$Perprof->id}}/events/create" class="btn btn-success">añadir eventos al perfil</a>
     </div>
     </div>
@@ -47,10 +47,9 @@
      <div class="btn-group" role="group" aria-label="Basic example">
       <a href="{{$Perprof->id}}/audios" class="btn btn-primary">audios</a>
       <a href="{{$Perprof->id}}/videos" class="btn btn-secondary">videos</a>
-      <a href="{{$Perprof -> id}}/events" class="btn btn-danger">eventos</a>
+      <a href="{{$Perprof->id}}/events" class="btn btn-danger">eventos</a>
     </div>
     </div>
-      
   </body>
 </html>
 @endsection

@@ -9,10 +9,14 @@ use Illuminate\Support\Facades\Storage;
 
 class AudiosController extends Controller
 {
+   public function __construct()
+    {
+      $this->middleware('auth')->except(['audiosfromprofile', 'descarga']);
+     
+    }
   public function audiosfromprofile($id)
   {
      $audios = Audio::all()->where('artistprofile_id',$id);
-     //$audios = artistprofile::find($id)->audio;
      return view("audios.audio",compact('audios'));
   }
     public function create()
@@ -22,13 +26,15 @@ class AudiosController extends Controller
     
   public function store(request $request)//$id
   {
+    $request->file('audio');
     $archivo = $request->file('audio');
     $nombreOriginal = $archivo->getClientOriginalName();
     $size = $archivo->getClientSize();
     $mime = $archivo->getMimeType();
-    $id=artistprofile::find(9)->id;
+    $id=Artistprofile::find(1)->id;
+    $request ->validate(['audio'=>'mimetypes:audio/mpeg,audio/mp4,audio/ogg,audio/x-wav']);
     if ($request->hasFile('audio')) {
-          $fs_name = $request->audio->store('');
+          $fs_name = $request->audio->store('');     
            Audio::create([
               'artistprofile_id' => $id,
               'original_name' => $nombreOriginal,
@@ -37,9 +43,14 @@ class AudiosController extends Controller
               'size' => $size,
               'directory' => ''
             ]);
-    }
-            \Session::flash('flash_message','Archivo a sido cargado con exito');
+         \Session::flash('flash_message','Archivo ha sido cargado con exito');
               return redirect()->back();
+    }
+    else
+    {
+       \Session::flash('flash_message','El archivo debe tener un formato de audio valido');
+              return redirect()->back();
+    }
   }
   
    public function destroy(Audio $archivo)
@@ -65,6 +76,7 @@ class AudiosController extends Controller
           $headers = ['Content-Type' => $archivo->mime];
           return \Storage::download($archivo->fs_name, $archivo->original_name, $headers);
       } else {
+       dd($archivo);
           \Session::flash('flash_message','NO SE ENCONTRO ARCHIVO');
           return redirect()->back();
       }

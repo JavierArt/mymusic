@@ -17,7 +17,7 @@ class CustomMiddleware
     public function handle($request, Closure $next)
     {
       
-      if(auth()->user()->age <=12)
+      if(auth()->user()->age <=13)
       {
         \Session::flash('flash_message','no tienes edad para crear perfil');
         return redirect('profiles');

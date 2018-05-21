@@ -2,52 +2,54 @@
 
 namespace App\Http\Controllers;
 
-use App\videos;
+use App\Video;
 use App\Artistprofile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class VideosController extends Controller
 {
-  public function index($id)
+  public function videosfromprofile($id)
   {
-     $videos = artistprofile::find($id)->audio;
+     $videos = Video::all()->where('artistprofile_id',$id);
      return view("videos.video",compact('videos'));
   }
-    public function store(Request $request)
+  public function create()
+  {
+     return view('videos.uploadVideoForm');
+  }
+  
+    public function store(request $request)
     {
-        $request->file('archivos');
-        $archivo = $request->file('archivos');
+        $request->file('video');
+        $archivo = $request->file('video');
         $nombreOriginal = $archivo->getClientOriginalName();
         $size = $archivo->getClientSize();
         $mime = $archivo->getMimeType();
-      
-        if ($request->hasFile('archivos')) {
-            $fs_name = $request->archivos->store('');
-           
-            Archivo::create([
-              'origen_id' => $request->input('origen_id'),
+        $id=Artistprofile::find(2)->id;
+        $request ->validate(['video'=>'mimetypes:video/mp4,video/mpeg,video/ogg,video/webm']);
+        if ($request->hasFile('video')) {	
+            $fs_name = $request->video->store('');
+            Video::create([
+              'artistprofile_id' => $id,
               'original_name' => $nombreOriginal,
               'fs_name' => $fs_name,
               'mime' => $mime,
               'size' => $size,
-              'directorio' => ''
+              'directory' => ''
             ]);
         }
-      
-         return redirect()->back()
-          ->with([
-            'message' => 'Archivo cargado con éxito',
-            'alert-class' => 'alert-success'
-          ]);
-
+       \Session::flash('flash_message','Archivo a sido cargado con exito');
+       return redirect()->back();
     }
 
-    public function destroy(videos $videos)
+    public function destroy(Video $archivo)
     {
-          if (\Storage::exists($archivo->fs_name)) {
+          if(\Storage::exists($archivo->fs_name)) {
             \Storage::delete($archivo->fs_name);
             $archivo->delete();
         } else {
+            dd($archivo);
             return redirect()->back()->with([
             'message' => 'NO SE ENCONTRÓ ARCHIVO',
             'alert-class' => 'alert-danger'
@@ -59,13 +61,14 @@ class VideosController extends Controller
             'alert-class' => 'alert-warning'
           ]);
     }
-   public function descarga(videos $videos)
+   public function descarga(Video $archivo)
    {
      if (\Storage::exists($archivo->fs_name)) {
           $headers = ['Content-Type' => $archivo->mime];
           return \Storage::download($archivo->fs_name, $archivo->original_name, $headers);
       } 
       else {
+        dd($archivo);
           return redirect()->back();
       }
    }

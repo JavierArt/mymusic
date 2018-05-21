@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
 {
-    protected $fillable = ['artistprofile_id', 'original_name', 'fs_name', 'mime', 'size', 'directorio'];
+    protected $fillable = ['artistprofile_id', 'original_name', 'fs_name', 'mime', 'size', 'directory'];
 
     public function profile()
     {
@@ -18,6 +18,6 @@ class Video extends Model
     }
     public function tags()
     {
-      return $this->morphToMany('App\tag','taggable')
+      return $this->morphToMany('App\tag','taggable');
     }
 }

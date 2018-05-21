@@ -17,7 +17,7 @@ class CreateArtistprofilesTable extends Migration
             $table->increments('id');
             $table->Integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('photo',10);
+            $table->string('photo',40);
             $table->text('description');
             $table->string('musictype',50);
             $table->string('webpage',100);

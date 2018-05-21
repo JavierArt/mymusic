@@ -15,47 +15,33 @@ use App\User;
 Route::get('/', function () {
   return view('welcome');
 });
-//mostrar perfiles
-//mostrar perfil personal 1/4
-//formulario datos perfil
-//falta middleware personalizado
+//mostrar perfil personal 3/4
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
-
+//profiles
 Route::get('/profiles','ArtistprofileController@index');
 Route::get('/profile/create', 'ArtistprofileController@create');
-Route::post('/profile', 'ArtistprofileController@store');
+Route::post('/profile/s', 'ArtistprofileController@store');
 Route::get('/profile/{Perprof}', 'ArtistprofileController@show');
 Route::get('/profile/{Perprof}/edit', 'ArtistprofileController@edit');
-Route::post('/profile/{Perprof}/edit', 'ArtistprofileController@update');
+Route::post('/profile/{Perprof}/edit', 'ArtistprofileController@update');//fix
 Route::resource('profileD', 'ArtistprofileController', ['only' => ['destroy']]);
 
-//Route::resource('profiles', 'ArtistprofileController');
-/*
-Route::put('/profile/{Perprof}', 'ArtistprofileController@update');
-Route::resource('artistprofile', 'ArtistprofileController', ['only' => ['destroy']]);
- 
-Route::get('/profile/{Perprof}/audios/', 'AudiosController@index');
-Route::get('/profile/{Perprof}/videos', 'ArtistprofileController@index');
-Route::get('/profile/{Perprof}/events', 'ArtistprofileController@index');
+//videos
+Route::get('/profile/{Perprof}/videos', 'VideosController@videosfromprofile');
+Route::get('/profile/{Perprof}/videos/create', 'VideosController@create');
+Route::get('descarga/{archivo}', 'VideosController@descarga')->name('descarga');//fix
+Route::resource('video', 'VideosController', ['only' => ['store', 'destroy']]);//fix destroy
 
-Route::get('/profile/{Perprof}/audios/descarga/{archivo}', 'AudiosController@descarga')->name('descarga');
-Route::resource('archivo', 'AudiosController', ['only' => ['store', 'destroy']]);
-
-Route::get('/profile/{Perprof}/videos/descarga/{archivo}', 'VideosController@descarga')->name('descarga');
-Route::resource('archivo', 'VideosController', ['only' => ['store', 'destroy']]);
-**/
-/*Route::get('/profile/{Perprof}/events','FutureventsController@index');
+//events
+Route::get('/profile/{Perprof}/events', 'FutureventsController@index');
 Route::get('/profile/{Perprof}/events/create','FutureventsController@create');
-Route::post('/profile/{Perprof}/events','FutureventsController@store');
-**/
-//luego lo muestro y subo
+Route::post('/profile/{Perprof}/events', 'FutureventsController@store');
+
+//audios
 Route::get('/profile/{Perprof}/audios','AudiosController@audiosfromprofile');
 Route::get('/profile/{Perprof}/audios/create','AudiosController@create');
-Route::get('descarga/{archivo}', 'AudiosController@descarga')->name('descarga');
-Route::resource('audio', 'AudiosController', ['only' => ['store', 'destroy']]);
-//Route::post('profile/{Perprof}/audios/create/', 'AudiosController@store');
-//Route::post('archivo/{Perprof}', 'AudiosController@destroy');
-
+Route::get('descarga/{archivo}', 'AudiosController@descarga')->name('descarga');//fix
+Route::resource('audio', 'AudiosController', ['only' => ['store', 'destroy']]);//fix destroy
 

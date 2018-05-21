@@ -18,7 +18,7 @@ class CreateFutureventsTable extends Migration
             $table->Integer('artistprofile_id')->unsigned();
             $table->foreign('artistprofile_id')->references('id')->on('artistprofiles');
             $table->text('place');
-            $table->text('date');
+            $table->date('date');
             $table->string('hora',30);
         });
     }
