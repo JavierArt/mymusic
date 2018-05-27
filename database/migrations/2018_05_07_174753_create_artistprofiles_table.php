@@ -23,7 +23,6 @@ class CreateArtistprofilesTable extends Migration
             $table->string('webpage',100);
             $table->string('contactemail',100);
             $table->string('artistname',100);
-            $table->softDeletes();
         });
     }
 

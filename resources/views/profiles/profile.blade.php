@@ -15,17 +15,31 @@
         {{Session::get('flash_message')}}
     </div>
     @endif
+      
+        <form class="navbar-form navbar-left" role="search" action="{{url('profiles/searchredirect')}}">
+          <div class="row">
+           <div class="col">
+             <div class="form-group">
+               <input type="text" class="form-control" name='search' placeholder="Buscar por genero musical"/>
+             </div>
+           </div>
+        <div class="col">
+           <button type="submit" class="btn btn-default">Buscar</button>
+        </div>
+          </div>
+        </form>
+      
     <div class="col-md-11">
+    <a class="btn btn-info" href="{{ URL::to('profiles/mayores/18') }}">Filtrar mayores de 18</a>
     @foreach($profile as $prof)
       <table class="table table-bordered">
           <thead>
             <tr>
               <th scope="col">Foto de perfil</th>
               <th scope="col">Nombre de artista</th>
-              <th scope="col">Tipo de musica</th>
+              <th scope="col">Genero musical</th>
               <th scope>edad</th>
               <th scope="col-lg"> acciones</th>
-              <th scope="col"></th>
             </tr>
           </thead>
         <tbody>
@@ -34,16 +48,13 @@
             <td><a href="/profile/{{ $prof->id }}">{{ $prof->artistname }}</a></td>
             <td>{{ $prof->musictype }}</td>
             <td>{{ $prof->User->age }}</td>
-            <td><a class="btn btn-warning btn-sm" href="{{ URL::to('profile/' . $prof->id . '/edit') }}">Editar este perfil</a></td>
-              <td> {!! Form::open(['route' => ['profileD.destroy', $prof->id], 'method' => 'DELETE']) !!}
-                      {!! Form::submit('Borrar', ['class' => 'btn btn-sm btn-danger btn-sm']) !!}
-                   {!! Form::close() !!}
-            </td>
+            <td><a class="btn btn-warning btn-sm" href="{{ URL::to('profile/' . $prof->id . '/edit') }}">Editar este perfil</a></td>            
           </tr>
         </tbody>
         </div>
       </table>
    @endforeach
+   {{ $profile->links() }}
   </body>
 </html>
 @endsection

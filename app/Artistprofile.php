@@ -11,8 +11,7 @@ class Artistprofile extends Model
 {
     public $timestamps = false;
     use Notifiable;
-    use SoftDeletes;
-   
+    
     public function User()
     {
         return $this->belongsTo('App\User');
@@ -32,7 +31,6 @@ class Artistprofile extends Model
     protected $fillable = [
         'user_id','photo', 'description', 'musictype','webpage','contactemail','artistname'
     ];
-    protected $dates = ['deleted_at'];
   
     //Mutator
     public function setArtistNameAttribute($value)

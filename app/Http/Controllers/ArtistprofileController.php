@@ -16,7 +16,7 @@ class ArtistprofileController extends Controller
      */
     public function __construct()
     {
-      $this->middleware('auth')->except(['index', 'show']);
+      $this->middleware('auth')->except(['index', 'show','search','mayor']);
       $this->middleware('minage')->only(['create','store']);
     }
   
@@ -28,11 +28,11 @@ class ArtistprofileController extends Controller
     public function index()
     {
         //contraining eager load
-        /*$profile = Artistprofile::with(['User' => function ($query) {            
-          $query->where('age', '>=', 18 );
+        /*$profile = Artistprofile::with(['User' => function ($query) {
+            $query->where('age', '>=', 18);
         }])->get();*/
         //eager loading
-        $profile = Artistprofile::with('User')->get();
+        $profile = Artistprofile::with('User')->paginate(4);
         return view('profiles.profile',compact('profile'));
      
     }
@@ -118,21 +118,47 @@ class ArtistprofileController extends Controller
         return Redirect('profiles');
  
     }
-
+    public function search($search)
+    {
+        $search = urldecode($search);
+        $profileB = Artistprofile::with('User')
+                ->where('musictype', 'LIKE', '%'.$search.'%')
+                ->get();
+        if (count($profileB) == 0){
+            return View('profiles.search')
+            ->with('message', 'No hay resultados que mostrar')
+            ->with('search', $search);
+        } else{
+            return View('profiles.search')
+            ->with('search', $search)
+            ->with('profileB', $profileB);
+        }
+    }
+    public function mayor()
+    {
+      $profileM = User::with('Artistprofile')
+             ->where('age','>=',18)
+             ->get();
+        if (count($profileM) == 0){
+            return View('profiles.search18')
+            ->with('message', 'No perfiles mayores de edad que mostrar');
+        } else{
+            return View('profiles.search18')
+            ->with('profileM', $profileM);
+        }
+    }
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\artistprofile  $artistprofile
-     * @return \Illuminate\Http\Response
+    puede ayudar despues
      */
-    public function destroy($id)
+    /**public function destroy($id)
     {
         $Perprof = Artistprofile::find($id);
         $Perprof->delete();
       // redirect
         \Session::flash('flash_message', 'Perfil borrado con exito!');
         return Redirect('/profiles');
-    }
+    }**/
     
     //aun debo implementar pero no es prioridad
   /*
