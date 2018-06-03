@@ -48,7 +48,11 @@
               <th>banda o solista</th>
               <th>Genero musical</th>
               <th>edad</th>
+              @auth
+              @if($prof->id == Auth::user()->id)
               <th>acciones</th>
+              @endif
+              @endauth
             </tr>
           </thead>    
         <tbody>
@@ -58,7 +62,11 @@
             <td>{{ $prof->bandornot }}</td>
             <td>{{ $prof->musictype }}</td>
             <td>{{ $prof->User->age }}</td>
-            <td><a class="btn btn-warning btn-sm" href="{{ URL::to('profile/' . $prof->id . '/edit') }}">Editar este perfil</a></td>            
+            @auth
+            @if($prof->id == Auth::user()->id)
+            <td><a class="btn btn-warning btn-sm" href="{{ URL::to('profile/' . $prof->id . '/edit') }}">Editar este perfil</a></td>
+            @endif
+            @endauth
           </tr>
         </tbody>
         </div>

@@ -44,7 +44,7 @@
           </tbody>
       </table>
       </div>
-      <!--deben de estar autenticados y debe ser su perfil para que aparesca el formulario para subir archivos-->
+      <!--deben de estar autenticados y debe ser su perfil para que aparesca el formulario para subir archivos si no aoarece mensaje-->
       @auth
       @if($Perprof->id == Auth::user()->id)
      <div class="col">
@@ -54,8 +54,10 @@
         @include('partials.FormVideo', ['origen_id'=> $Perprof->id])
       </div>
       @else
-      <h1>BIENVENIDOS A MI PERFIL DISFRUTE SU VISITA</h1>
+        <h1>BIENVENIDOS A MI PERFIL DISFRUTE SU VISITA</h1>
       @endif
+      @else
+        <h1>BIENVENIDOS A MI PERFIL DISFRUTE SU VISITA</h1>
       @endauth
       </div>
       <a href="{{$Perprof->id}}/events/create" class="btn btn-success">añadir eventos al perfil</a>
