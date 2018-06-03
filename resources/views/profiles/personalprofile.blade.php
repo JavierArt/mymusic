@@ -47,12 +47,14 @@
       <!--deben de estar autenticados y debe ser su perfil para que aparesca el formulario para subir archivos si no aoarece mensaje-->
       @auth
       @if($Perprof->id == Auth::user()->id)
-     <div class="col">
+     <div class="col-3">
         @include('partials.FormAudio', ['origen_id' => $Perprof->id])
       </div>
-      <div class="col">
+      <div class="col-3">
         @include('partials.FormVideo', ['origen_id'=> $Perprof->id])
       </div>
+    <div clas="col-2">
+       <a href="{{$Perprof->id}}/events/create" class="btn btn-success">añadir eventos al perfil</a>
       @else
         <h1>BIENVENIDOS A MI PERFIL DISFRUTE SU VISITA</h1>
       @endif
@@ -60,13 +62,15 @@
         <h1>BIENVENIDOS A MI PERFIL DISFRUTE SU VISITA</h1>
       @endauth
       </div>
-      <a href="{{$Perprof->id}}/events/create" class="btn btn-success">añadir eventos al perfil</a>
-    <br>
-    <br>
-     <div class="btn-group" role="group" aria-label="Basic example">
-      <a href="{{$Perprof->id}}/audios" class="btn btn-outline-primary">audios</a>
-      <a href="{{$Perprof->id}}/videos" class="btn btn-outline-secondary">videos</a>
-      <a href="{{$Perprof->id}}/events" class="btn btn-outline-danger">eventos</a>
+    </div>
+    <div class="row">
+       <div class="btn-group" role="group" aria-label="Basic example">
+        <div class="col">
+        <a href="{{$Perprof->id}}/audios" class="btn btn-outline-primary">audios</a>
+        <a href="{{$Perprof->id}}/videos" class="btn btn-outline-secondary">videos</a>
+        <a href="{{$Perprof->id}}/events" class="btn btn-outline-danger">eventos</a>
+       </div>
+      </div>
     </div>
   </body>
 </html>
