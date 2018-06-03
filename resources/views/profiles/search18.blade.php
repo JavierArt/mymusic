@@ -17,6 +17,7 @@
                 <tr>
                   <th scope="col">Foto de perfil</th>
                   <th scope="col">Nombre de artista</th>
+                  <th scope="col">banda o solista</th>
                   <th scope="col">Genero musical</th>
                   <th scope="col">edad</th>
                 </tr>
@@ -25,10 +26,9 @@
               <tr>
                 <td>{{ $prof->Artistprofile->photo }}</td>
                 <td><a href="/profile/{{ $prof->id }}">{{ $prof->Artistprofile->artistname }}</a></td>
+                <td>{{ $prof->artistprofile->bandornot }}</td>
                 <td>{{ $prof->Artistprofile->musictype }}</td>
                 <td>{{ $prof->age }}</td>
-                @if(isset(Auth::user()->id))
-                @endif
               </tr>
             </tbody>
             </div>

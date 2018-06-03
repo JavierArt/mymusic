@@ -7,11 +7,12 @@ use App\Artistprofile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+
 class AudiosController extends Controller
 {
    public function __construct()
     {
-      $this->middleware('auth')->except(['audiosfromprofile', 'descarga']);
+      $this->middleware('auth')->only(['store']);
      
     }
   public function audiosfromprofile($id)
@@ -28,10 +29,10 @@ class AudiosController extends Controller
     $nombreOriginal = $archivo->getClientOriginalName();
     $size = $archivo->getClientSize();
     $mime = $archivo->getMimeType();
-    $id=Artistprofile::find($id)->id;
+    $id=Artistprofile::find(1)->id;
     $request ->validate(['audio'=>'mimetypes:audio/mpeg,audio/mp4,audio/ogg,audio/x-wav']);
     if ($request->hasFile('audio')) {
-          $fs_name = $request->audio->store('',$id);     
+          $fs_name = $request->audio->store('');     
            Audio::create([
               'artistprofile_id' => $id,
               'original_name' => $nombreOriginal,
@@ -48,5 +49,5 @@ class AudiosController extends Controller
        \Session::flash('flash_message','El archivo debe tener un formato de audio valido');
               return redirect()->back();
     }
-  }  
+  }
 }

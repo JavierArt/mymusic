@@ -29,7 +29,7 @@ class Artistprofile extends Model
       return $this->hasMany('App\Video');
     }
     protected $fillable = [
-        'user_id','photo', 'description', 'musictype','webpage','contactemail','artistname'
+        'user_id', 'photo', 'bandornot', 'description', 'musictype','webpage','contactemail','artistname'
     ];
   
     //Mutator

@@ -16,7 +16,7 @@ class ArtistprofileController extends Controller
      */
     public function __construct()
     {
-      $this->middleware('auth')->except(['index', 'show','search','mayor']);
+      $this->middleware('auth')->except(['index', 'show','search','mayor','bandas','solistas']);
       $this->middleware('minage')->only(['create','store']);
     }
   
@@ -27,10 +27,6 @@ class ArtistprofileController extends Controller
      */
     public function index()
     {
-        //contraining eager load
-        /*$profile = Artistprofile::with(['User' => function ($query) {
-            $query->where('age', '>=', 18);
-        }])->get();*/
         //eager loading
         $profile = Artistprofile::with('User')->paginate(4);
         return view('profiles.profile',compact('profile'));
@@ -56,6 +52,7 @@ class ArtistprofileController extends Controller
     public function store(Request $request)
     {
       $request ->validate([
+      'bandornot'=>'required',
       'description'=>'required',
       'musictype'=>'required',
       'contactemail'=>'required|email',
@@ -89,8 +86,8 @@ class ArtistprofileController extends Controller
      */
   //tengo que hacer edit  y update despues
     public function edit($id)
-    {
-        return view('profiles.editdataprofileForm');
+    {      
+      return view('profiles.editdataprofileForm');
     }
 
     /**
@@ -100,22 +97,8 @@ class ArtistprofileController extends Controller
      * @param  \App\artistprofile  $artistprofile
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Request $request,$id)
     {
-      $request ->validate([
-      'description'=>'required',
-      'musictype'=>'required',
-      'contactemail'=>'required',
-      'artistname'=>'required'
-    ]);
-
-        $atu = Artistprofile::find($id);
-        $atu = $request->all();
-        $atu['user_id'] = Auth::user()->id;
-        $atu->save();
-        // redirect
-        \Session::flash('flash_message', 'Successfully updated profile!');
-        return Redirect('profiles');
  
     }
     public function search($search)
@@ -141,11 +124,39 @@ class ArtistprofileController extends Controller
              ->get();
         if (count($profileM) == 0){
             return View('profiles.search18')
-            ->with('message', 'No perfiles mayores de edad que mostrar');
+            ->with('message', 'No hay perfiles mayores de edad que mostrar');
         } else{
             return View('profiles.search18')
             ->with('profileM', $profileM);
         }
+    }
+    public function bandas()
+    {
+      $profileBands= Artistprofile::with('User')
+        ->where('bandornot','=','Banda')
+        ->get();
+      if (count($profileBands) == 0){
+            return View('profiles.searchbands')
+            ->with('message', 'No hay perfiles de bandas mostrar');
+      }
+      else{
+        return view('profiles.searchbands')
+        ->with('profileBands',$profileBands);
+      }
+    }
+    public function solistas()
+    {
+      $profileSolista= Artistprofile::with('User')
+        ->where('bandornot','=','Solista')
+        ->get();
+      if (count($profileSolista) == 0){
+            return View('profiles.searchsolistas')
+            ->with('message', 'No hay perfiles de solistas mostrar');
+      }
+      else{
+        return view('profiles.searchsolistas')
+        ->with('profileSolista',$profileSolista);
+      }
     }
     /**
      * Remove the specified resource from storage.
@@ -159,18 +170,10 @@ class ArtistprofileController extends Controller
         \Session::flash('flash_message', 'Perfil borrado con exito!');
         return Redirect('/profiles');
     }**/
-    
-    //aun debo implementar pero no es prioridad
-  /*
-    public function myownprofile($Owprofile)
+      
+    public function own($Perprof)
     {
-      //objeto usuario logeado
-      $user = Auth::user();
-      // Obtiene el ID del Usuario Autenticado
-      $UPprof = Auth::$user->id;
-      //uso de accesor con ID usuario loggeado para encontrar el perfil perteneciente al usuario
-      $Ownprofile = artistprofile::find($OwID);
-           
-      return view("profiles.personalprofile",compact('Ownprofile'));
-    }*/
+       $Perprof=Artistprofile::find(Auth::user()->id);
+       return view("profiles.personalprofile",compact('Perprof'));
+    }
 }

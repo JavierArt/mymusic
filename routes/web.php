@@ -25,7 +25,8 @@ Route::get('/profile/create', 'ArtistprofileController@create');
 Route::post('/profile/s', 'ArtistprofileController@store');
 Route::get('/profile/{Perprof}', 'ArtistprofileController@show');
 Route::get('/profile/{Perprof}/edit', 'ArtistprofileController@edit');
-Route::post('/profile/{Perprof}/edit', 'ArtistprofileController@update');//fix
+Route::post('/profile/{Perprof}', 'ArtistprofileController@update');//fix
+Route::get('/profile/{profile}/self','ArtistprofileController@own');
 //Route::resource('profileD', 'ArtistprofileController', ['only' => ['destroy']]);
 Route::get('profiles/searchredirect', function(){     
     /* Nuevo: si el argumento search está vacío regresar a la página anterior */
@@ -37,6 +38,8 @@ Route::get('profiles/searchredirect', function(){
 });
 Route::get("/profiles/{search}", "ArtistprofileController@search");
 Route::get("/profiles/mayores/18","ArtistprofileController@mayor");
+Route::get("/profiles/banda/s","ArtistprofileController@bandas");
+Route::get("/profiles/solista/s","ArtistprofileController@solistas");
 
 //videos
 Route::get('/profile/{Perprof}/videos', 'VideosController@videosfromprofile');

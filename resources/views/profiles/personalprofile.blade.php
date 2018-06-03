@@ -24,34 +24,47 @@
               <td>{{ $Perprof->artistname}}</td>
             </tr>
             <tr>
+              <td>{{ $Perprof->bandornot}}</td>
+            </tr>
+            <tr>
               <td>{{ $Perprof->description }}</td>
             </tr>
             <tr>
               <td>{{ $Perprof->musictype }}</td>
             </tr>
             <tr>
-              <td>{{ $Perprof->webpage }}</td>
+              <td><a target="_blank" href="{{$Perprof->webpage}}">{{ $Perprof->webpage }}</a></td>
             </tr>
             <tr>
               <td>{{ $Perprof->contactemail }}</td>
             </tr>
+            <tr>
+              <td>{{$Perprof->User->age }}</td>
+            </tr>
           </tbody>
       </table>
       </div>
+      <!--deben de estar autenticados y debe ser su perfil para que aparesca el formulario para subir archivos-->
+      @auth
+      @if($Perprof->id == Auth::user()->id)
      <div class="col">
         @include('partials.FormAudio', ['origen_id' => $Perprof->id])
       </div>
       <div class="col">
-      <a href="{{$Perprof->id}}/videos/create" class="btn btn-info">añadir video al perfil</a>
+        @include('partials.FormVideo', ['origen_id'=> $Perprof->id])
       </div>
+      @else
+      <h1>BIENVENIDOS A MI PERFIL DISFRUTE SU VISITA</h1>
+      @endif
+      @endauth
       </div>
-    
       <a href="{{$Perprof->id}}/events/create" class="btn btn-success">añadir eventos al perfil</a>
     <br>
+    <br>
      <div class="btn-group" role="group" aria-label="Basic example">
-      <a href="{{$Perprof->id}}/audios" class="btn btn-primary">audios</a>
-      <a href="{{$Perprof->id}}/videos" class="btn btn-secondary">videos</a>
-      <a href="{{$Perprof->id}}/events" class="btn btn-danger">eventos</a>
+      <a href="{{$Perprof->id}}/audios" class="btn btn-outline-primary">audios</a>
+      <a href="{{$Perprof->id}}/videos" class="btn btn-outline-secondary">videos</a>
+      <a href="{{$Perprof->id}}/events" class="btn btn-outline-danger">eventos</a>
     </div>
   </body>
 </html>
