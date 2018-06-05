@@ -24,7 +24,7 @@
               </thead>
             <tbody>
               <tr>
-                <td>{{ $prof->Artistprofile->photo }}</td>
+                <td><img src="/uploads/avatars/{{ $prof->Artistprofile->photo }}" style="width:40px; height:40px; float:left; border-radius:50%; margin-right:25px;"></td>
                 <td><a href="/profile/{{ $prof->id }}">{{ $prof->Artistprofile->artistname }}</a></td>
                 <td>{{ $prof->artistprofile->bandornot }}</td>
                 <td>{{ $prof->Artistprofile->musictype }}</td>

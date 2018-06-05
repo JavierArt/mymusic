@@ -6,6 +6,7 @@ use App\Artistprofile;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Image;
 
 class ArtistprofileController extends Controller
 {
@@ -27,10 +28,15 @@ class ArtistprofileController extends Controller
      */
     public function index()
     {
-        //eager loading
-        $profile = Artistprofile::with('User')->paginate(4);
-        return view('profiles.profile',compact('profile'));
-     
+      if(auth()->guard()->check()){
+        $idPerf=Artistprofile::find(Auth::user()->id)->id;
+      }
+      else{
+        $idPerf=0;
+      }
+      //eager loading
+      $profile = Artistprofile::with('User')->paginate(4);
+      return view('profiles.profile',compact('profile','idPerf'));  
     }
 
     /**
@@ -65,7 +71,20 @@ class ArtistprofileController extends Controller
     \Session::flash('flash_message','el perfil ha sido creado');
     return redirect('/profiles');
     }
-
+  
+    public function updateavatar(Request $request)
+    {
+      $request ->validate(['audio'=>'mimetypes:image/jpeg,image/png,audio/ogg,audio/x-wav']);
+      if($request->hasFile('avatar')){
+        $avatar=$request->file('avatar');
+    		$filename = time() . '.' . $avatar->getClientOriginalExtension();
+    		Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
+        $Perprof=Artistprofile::find(Auth::user()->id);
+    		$Perprof->photo = $filename;
+    		$Perprof->save();
+      }
+      return view("profiles.personalprofile",compact('Perprof'));
+    }
     /**
      * Display the specified resource.
      *
@@ -146,16 +165,16 @@ class ArtistprofileController extends Controller
     }
     public function solistas()
     {
-      $profileSolista= Artistprofile::with('User')
+      $profileBands= Artistprofile::with('User')
         ->where('bandornot','=','Solista')
         ->get();
-      if (count($profileSolista) == 0){
-            return View('profiles.searchsolistas')
+      if (count($profileBands) == 0){
+            return View('profiles.searchbands')
             ->with('message', 'No hay perfiles de solistas mostrar');
       }
       else{
-        return view('profiles.searchsolistas')
-        ->with('profileSolista',$profileSolista);
+        return view('profiles.searchbands')
+        ->with('profileBands',$profileBands);
       }
     }
     /**

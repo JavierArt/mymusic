@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Audio;
 use App\Artistprofile;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class AudiosController extends Controller
@@ -24,12 +27,14 @@ class AudiosController extends Controller
     
   public function store(request $request)
   {
+    $idPerf=Artistprofile::find(Auth::user()->id)->id;
     $request->file('audio');
     $archivo = $request->file('audio');
     $nombreOriginal = $archivo->getClientOriginalName();
     $size = $archivo->getClientSize();
     $mime = $archivo->getMimeType();
-    $id=Artistprofile::find(1)->id;
+    $id=Artistprofile::find($idPerf)->id;
+    
     $request ->validate(['audio'=>'mimetypes:audio/mpeg,audio/mp4,audio/ogg,audio/x-wav']);
     if ($request->hasFile('audio')) {
           $fs_name = $request->audio->store('');     

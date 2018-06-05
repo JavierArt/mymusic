@@ -6,6 +6,8 @@ use App\Video;
 use App\Artistprofile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+
 
 class VideosController extends Controller
 {
@@ -17,12 +19,13 @@ class VideosController extends Controller
   
     public function store(request $request)
     {
+        $idPerf=Artistprofile::find(Auth::user()->id)->id;
         $request->file('video');
         $archivo = $request->file('video');
         $nombreOriginal = $archivo->getClientOriginalName();
         $size = $archivo->getClientSize();
         $mime = $archivo->getMimeType();
-        $id=Artistprofile::find(1)->id;
+        $id=Artistprofile::find($idPerf)->id;
         $request ->validate(['video'=>'mimetypes:video/mp4,video/mpeg,video/ogg,video/webm']);
         if ($request->hasFile('video')) {	
             $fs_name = $request->video->store('');

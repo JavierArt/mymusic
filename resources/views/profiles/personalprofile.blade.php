@@ -14,9 +14,19 @@
     <div class="row">
     <div class="col-sm-4">     
       <table class="table">
-          <thead class="table-light">
+          <thead class="thead-light">
             <tr>
-              <th scope="col">{{ $Perprof->photo }}</th>
+              <th><img src="/uploads/avatars/{{ $Perprof->photo }}" style="width:80px; height:80px; float:left; border-radius:50%; margin-right:25px;">
+                 @auth
+                 @if($Perprof->id == Auth::user()->id)  
+                <h6>Subir foto de perfil</h6>
+                  {!! Form::open(['action' => ['ArtistprofileController@updateavatar'], 'files' => 'true']) !!}
+                  {!! Form::file('avatar') !!}
+                  {!! Form::submit('subir imagen', ['class' => 'btn btn-primary btn-sm']) !!}
+                  {!! Form::close() !!}
+                @endif
+                @endauth
+              </th>
             </tr>
           </thead>
           <tbody>

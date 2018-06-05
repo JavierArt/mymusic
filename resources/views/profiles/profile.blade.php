@@ -8,9 +8,19 @@
    <title>Perfiles de musicos</title>
   </head>
   <body background-color: #fff;>
-    <h1>
-      estos son los perfiles de los musicos
-    </h1>
+    @if (count($profile) == 0)
+      <h1>no existen perfiles que mostrar</h1>
+    @else
+    <div class="row">
+      <div class=col-10>
+        <h1>estos son los perfiles de los musicos</h1>
+      </div>
+      <div class="col-2">
+        @auth
+            <a class="fas fa-user-ninja fa-4x text-dark" href="/profile/{{ $idPerf }}/self"></a>
+        @endauth
+      </div>
+    </div>
     @if(Session::has('flash_message'))
       <div class="alert alert-success">
         {{Session::get('flash_message')}}
@@ -19,18 +29,13 @@
       
         <form class="navbar-form navbar-left" role="search" action="{{url('profiles/searchredirect')}}">
           <div class="row">
-            <div class="col-4">
+            <div class="col-7">
              <div class="form-group">
                <input type="text" class="form-control" name='search' placeholder="Buscar por genero musical"/>
              </div>
            </div>
-        <div class="col-6">
+        <div class="col-4">
            <button type="submit" class="btn btn-dark">Buscar</button>
-        </div>
-        <div class="col-2">
-        @auth
-          <a class="fas fa-user-circle fa-4x text-dark" href="/profile/{profile}/self"></a>
-        @endauth
         </div>
         </div>
         </form>
@@ -57,7 +62,7 @@
           </thead>    
         <tbody>
           <tr>
-            <td>{{ $prof->photo }}</td>
+            <td><img src="/uploads/avatars/{{ $prof->photo }}" style="width:40px; height:40px; float:left; border-radius:50%; margin-right:25px;"></td>
             <td><a href="/profile/{{ $prof->id }}">{{ $prof->artistname }}</a></td>
             <td>{{ $prof->bandornot }}</td>
             <td>{{ $prof->musictype }}</td>
@@ -73,6 +78,7 @@
       </table>
    @endforeach
    {{ $profile->links() }}
+   @endif
   </body>
 </html>
 @endsection

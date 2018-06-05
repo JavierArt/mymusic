@@ -2,7 +2,7 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ URL::asset('css/general.css') }}" type="text/css">
-<h1>Perfiles de bandas</h1>
+<h1>Perfiles encontrados</h1>
 @if (isset($message))
 <div class='bg-warning' style='padding: 20px'>
     {{$message}}
@@ -24,7 +24,7 @@
               </thead>
             <tbody>
               <tr>
-                <td>{{ $prof->photo }}</td>
+                <td><img src="/uploads/avatars/{{ $prof->photo }}" style="width:40px; height:40px; float:left; border-radius:50%; margin-right:25px;"></td>
                 <td><a href="/profile/{{ $prof->id }}">{{ $prof->artistname }}</a></td>  
                 <td>{{ $prof->bandornot }}</td>
                 <td>{{ $prof->musictype }}</td>

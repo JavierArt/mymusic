@@ -12,20 +12,16 @@
 @include('layouts.errors'):
 <div class="col-7">  
       {!! Form::open(['action' => 'ArtistprofileController@store']) !!}
-      <div class="form-group">
-        {{ Form::label('photo', 'foto de perfil') }}
-        {!! Form::text('photo',null, ['placeholder' => 'aqui podras subir una foto en un futuro?', 'class' => 'form-control','required']) !!}
-      </div>
-
-       <div class="form-group">
-         {{ Form::label('bandornot', 'banda o solista?') }}
-         <br>
-         {{!! Form::select('bandornot', ['Banda' => 'banda', 'Solista' => 'solista'], 'Banda') !!}}
-      </div>
       
       <div class="form-group">
         {{ Form::label('description', 'descripción') }}
         {!! Form::text('description', null, ['placeholder' => 'describe quien eres?', 'class' => 'form-control','required']) !!}
+      </div>
+  
+       <div class="form-group">
+         {{ Form::label('bandornot', 'banda o solista?') }}
+         <br>
+         {{!! Form::select('bandornot', ['Banda' => 'banda', 'Solista' => 'solista'], 'Banda') !!}}
       </div>
     
       <div class="form-group">
