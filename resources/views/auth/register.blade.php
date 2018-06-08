@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 
 <div class="container">
@@ -41,8 +40,7 @@
                         </div>
               
                       <div class="form-group row">
-                            <label for="age" class="col-md-4 col-form-label text-md-right datepicker-here" data-position="right top">{{ __('Fecha de nacimiento') }}</label>
-
+                            <label for="age" class="col-md-4 col-form-label text-md-right datepicker-here" data-position="right top">{{ __('Fecha de nacimiento(Y-M-D)') }}</label>
                             <div class="col-md-6">
                                 <input id="age" type="text" class="form-control{{ $errors->has('age') ? ' is-invalid' : '' }}" name="age" value="{{ old('age') }}" required>
 

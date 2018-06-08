@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col-md-8">
     <h2>
-      Capturar informacion de perfil
+     Crear de perfil
     </h2>
   </div>
 </div>
@@ -21,7 +21,7 @@
        <div class="form-group">
          {{ Form::label('bandornot', 'banda o solista?') }}
          <br>
-         {{!! Form::select('bandornot', ['Banda' => 'banda', 'Solista' => 'solista'], 'Banda') !!}}
+         {{!! Form::select('bandornot', ['Banda' => 'banda', 'Solista' => 'solista', 'Dj' => 'Dj'], 'Banda') !!}}
       </div>
     
       <div class="form-group">

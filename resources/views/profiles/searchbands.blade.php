@@ -28,7 +28,7 @@
                 <td><a href="/profile/{{ $prof->id }}">{{ $prof->artistname }}</a></td>  
                 <td>{{ $prof->bandornot }}</td>
                 <td>{{ $prof->musictype }}</td>
-                <td>{{ $prof->User->age }}</td>
+                <td>{{ $prof->User->age->diffForhumans(null,true) }}</td>
               </tr>
             </tbody>
             </div>

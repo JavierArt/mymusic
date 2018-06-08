@@ -5,4 +5,4 @@ y si quieren pueden contactarte por medio del correo electronico proporcionado e
 para realizar algun cover y subirlo a algun otro sitio como youtube, pueden contactarte para tocar en algun evento,
 tambien puedes publicar los eventos en donde estaran para que mas gente pueda ir 
 
-El codigo utiliza laravel collective
+El codigo utiliza laravel collective e intervention image

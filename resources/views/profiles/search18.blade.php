@@ -2,7 +2,7 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ URL::asset('css/general.css') }}" type="text/css">
-<h1>mayores de 18 años</h1>
+<h1>mayores de 18 años primero</h1>
 @if (isset($message))
 <div class='bg-warning' style='padding: 20px'>
     {{$message}}
@@ -28,7 +28,7 @@
                 <td><a href="/profile/{{ $prof->id }}">{{ $prof->Artistprofile->artistname }}</a></td>
                 <td>{{ $prof->artistprofile->bandornot }}</td>
                 <td>{{ $prof->Artistprofile->musictype }}</td>
-                <td>{{ $prof->age }}</td>
+                <td>{{ $prof->age->diffForHumans(null,true) }}</td>
               </tr>
             </tbody>
             </div>

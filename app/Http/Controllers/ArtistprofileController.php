@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Image;
+use DB;
 
 class ArtistprofileController extends Controller
 {
@@ -17,8 +18,8 @@ class ArtistprofileController extends Controller
      */
     public function __construct()
     {
-      $this->middleware('auth')->except(['index', 'show','search','mayor','bandas','solistas']);
-      $this->middleware('minage')->only(['create','store']);
+      $this->middleware('auth')->except(['index', 'show','search','mayorfirst','bandas','solistas','DJS']);
+      //$this->middleware('checkDprofile')->only(['create','store']);
     }
   
     /**
@@ -28,15 +29,15 @@ class ArtistprofileController extends Controller
      */
     public function index()
     {
-      if(auth()->guard()->check()){
+      //eager loading
+      $profile = Artistprofile::with('User')->paginate(4);
+      if(Auth()->guard()->check()){
         $idPerf=Artistprofile::find(Auth::user()->id)->id;
       }
       else{
         $idPerf=0;
       }
-      //eager loading
-      $profile = Artistprofile::with('User')->paginate(4);
-      return view('profiles.profile',compact('profile','idPerf'));  
+      return view('profiles.profile',compact('profile','idPerf'));
     }
 
     /**
@@ -74,7 +75,7 @@ class ArtistprofileController extends Controller
   
     public function updateavatar(Request $request)
     {
-      $request ->validate(['audio'=>'mimetypes:image/jpeg,image/png,audio/ogg,audio/x-wav']);
+      $request ->validate(['avatar'=>'mimetypes:image/jpeg,image/png']);
       if($request->hasFile('avatar')){
         $avatar=$request->file('avatar');
     		$filename = time() . '.' . $avatar->getClientOriginalExtension();
@@ -105,8 +106,9 @@ class ArtistprofileController extends Controller
      */
   //tengo que hacer edit  y update despues
     public function edit($id)
-    {      
-      return view('profiles.editdataprofileForm');
+    {
+      $item = Artistprofile::find($id);
+      return view('profiles.editdataprofileForm',compact('item'));
     }
 
     /**
@@ -118,8 +120,27 @@ class ArtistprofileController extends Controller
      */
     public function update(Request $request,$id)
     {
- 
+      $add_profile = Artistprofile::find($id);
+      $request ->validate([
+      'bandornot'=>'required',
+      'description'=>'required',
+      'musictype'=>'required',
+      'contactemail'=>'required|email',
+      'artistname'=>'required'
+      ]);
+      $add_profile->description = $request->description;
+      $add_profile->bandornot = $request->bandornot;
+      $add_profile->musictype = $request->musictype;
+      $add_profile->contactemail = $request->contactemail;
+      $add_profile->artistname = $request->artistname;
+      if($add_profile->save()){
+        \Session::flash('flash_message', 'perfil cambiado exitosamente!');
+    }else{
+        \Session::flash('flash_message', 'algo salio mal!');
     }
+    return redirect('/profiles');
+    }
+    
     public function search($search)
     {
         $search = urldecode($search);
@@ -136,17 +157,16 @@ class ArtistprofileController extends Controller
             ->with('profileB', $profileB);
         }
     }
-    public function mayor()
+    public function mayorfirst()
     {
-      $profileM = User::with('Artistprofile')
-             ->where('age','>=',18)
-             ->get();
-        if (count($profileM) == 0){
+      $profileM = User::with('Artistprofile')->get();
+      $sorted = $profileM->sortBy('age');
+        if (count($sorted) == 0){
             return View('profiles.search18')
             ->with('message', 'No hay perfiles mayores de edad que mostrar');
         } else{
             return View('profiles.search18')
-            ->with('profileM', $profileM);
+            ->with('profileM', $sorted);
         }
     }
     public function bandas()
@@ -176,6 +196,21 @@ class ArtistprofileController extends Controller
         return view('profiles.searchbands')
         ->with('profileBands',$profileBands);
       }
+    }
+   
+    public function DJS()
+    {
+      $profileBands=Artistprofile::with('User')
+        ->where('bandornot','=', 'Dj')
+        ->get();
+      if(count($profileBands)==0){
+        return view('profiles.searchbands')
+          ->with('message', 'no hay perfiles que mostrar');
+        }
+        else{
+          return view('profiles.searchbands')
+            ->with('profileBands',$profileBands);
+          }
     }
     /**
      * Remove the specified resource from storage.
