@@ -20,14 +20,14 @@ class FutureventsController extends Controller
        return view("eventos.events",compact('eventos'));
     }
 
-    public function create()
+    public function create($id)
     {
-        return view('eventos.dataeventsForm');
+        $evprof=Artistprofile::find($id);
+        return view('eventos.dataeventsForm',compact('evprof'));
     }
 
     public function store(Request $request,$id)
     {
-      dd($id);
       $request ->validate([
       'place'=>'required',
       'date'=>'required',
@@ -45,9 +45,5 @@ class FutureventsController extends Controller
     {
         $eventos = Artistprofile::all()->where('artistprofile_id',$id);//histtorial eventos completo
        return view("eventos.events",compact('eventos'));
-    }
-    public function destroy(futurevents $futurevents)
-    {
-        //
     }
 }

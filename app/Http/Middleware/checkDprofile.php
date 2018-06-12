@@ -18,9 +18,8 @@ class checkDprofile
     public function handle($request, Closure $next)
     {
       //if usuario autenticado cuenta con un perfil no puede crear otro
-      $count = Auth::user()::withCount('Artistprofile')->get();
-      dd($count);
-       if ($idd > 1) {
+      $valida = Auth::user()->profornot;
+       if ($valida == 1) {
            \Session::flash('flash_message','no puedes crear mas de un perfil');
             return redirect('/profiles');
         }

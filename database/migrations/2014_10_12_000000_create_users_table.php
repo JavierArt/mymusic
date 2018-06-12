@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->date('age');
             $table->string('password');
+            $table->smallInteger('profornot')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

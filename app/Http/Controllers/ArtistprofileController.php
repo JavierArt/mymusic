@@ -19,7 +19,7 @@ class ArtistprofileController extends Controller
     public function __construct()
     {
       $this->middleware('auth')->except(['index', 'show','search','mayorfirst','bandas','solistas','DJS']);
-      //$this->middleware('checkDprofile')->only(['create','store']);
+      $this->middleware('checkDprofile')->only(['create','store']);
     }
   
     /**
@@ -58,6 +58,8 @@ class ArtistprofileController extends Controller
      */
     public function store(Request $request)
     {
+      $idu = Auth::user()->id;
+      $user2=User::find($idu);
       $request ->validate([
       'bandornot'=>'required',
       'description'=>'required',
@@ -67,8 +69,10 @@ class ArtistprofileController extends Controller
     ]);
     $data = $request->all();
     $data['user_id'] = Auth::user()->id;
+    $user2['profornot'] = 1;
     $add_profile = new Artistprofile($data);
     $add_profile->save();
+    $user2->save();
     \Session::flash('flash_message','el perfil ha sido creado');
     return redirect('/profiles');
     }
@@ -121,13 +125,7 @@ class ArtistprofileController extends Controller
     public function update(Request $request,$id)
     {
       $add_profile = Artistprofile::find($id);
-      $request ->validate([
-      'bandornot'=>'required',
-      'description'=>'required',
-      'musictype'=>'required',
-      'contactemail'=>'required|email',
-      'artistname'=>'required'
-      ]);
+      $json=json_encode($add_profile);
       $add_profile->description = $request->description;
       $add_profile->bandornot = $request->bandornot;
       $add_profile->musictype = $request->musictype;
