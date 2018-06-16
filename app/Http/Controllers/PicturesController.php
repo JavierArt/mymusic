@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Pictures;
 use App\Artistprofile;
+use Image;
 
 
 
@@ -16,18 +17,18 @@ class PicturesController extends Controller
       $this->middleware('auth')->only(['store']);
      
     }
+  
    public function picsfromprofile($id)
   {
      $pictures = Pictures::all()->where('artistprofile_id',$id);
      return view("pictures.pictures",compact('pictures'));//hacer vista
   }
-  //hacer rutas
+  
   public function store(request $request)
   {
-    //hacer formulario y ponerlo en vista
     $idPerf=Artistprofile::find(Auth::user()->id)->id;
-    $request->file('picture');
     $archivo = $request->file('picture');
+    $fs_name = time() . '.' . $archivo->getClientOriginalExtension();
     $nombreOriginal = $archivo->getClientOriginalName();
     $size = $archivo->getClientSize();
     $mime = $archivo->getMimeType();
@@ -35,7 +36,7 @@ class PicturesController extends Controller
     
     $request ->validate(['picture'=>'mimetypes:image/jpeg,image/png']);
     if ($request->hasFile('picture')) {
-          $fs_name = $request->picture->store('');     
+        Image::make($archivo)->resize(200, 200)->save( public_path('/uploads/pictures/' . $fs_name ) );
            Pictures::create([
               'artistprofile_id' => $id,
               'original_name' => $nombreOriginal,
@@ -44,7 +45,7 @@ class PicturesController extends Controller
               'size' => $size,
               'directory' => ''
             ]);
-         \Session::flash('flash_message','Audio ha sido cargado con exito');
+         \Session::flash('flash_message','Imagen cargada con exito');
               return redirect()->back();
     }
   }

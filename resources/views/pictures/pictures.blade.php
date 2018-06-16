@@ -15,24 +15,21 @@
     <h1>
       Imagenes del perfil
     </h1>
-    <div class="col-md-8">
+    <div class="col-md-4">
       <table class="table">
       <thead>
         <tr>
-          <th>Archivo</th>
-          <th>fecha de creacion</th>
-          <th>Acciones</th>
+          <th>Archivos</th>
         </tr>
       </thead>
       <tbody>
         @foreach($pictures as $archivo)
           <tr>
-            <td>{{ $archivo->original_name }}</td>
-            <td>{{ $archivo->created_at->toFormattedDateString() }}</td>
+            <td><img src="/uploads/pictures/{{ $archivo->fs_name }}" alt="imagen"><br>{{ $archivo->created_at->toFormattedDateString() }}</td>
           </tr>
         @endforeach
       </tbody>
-      </div>
+    </div>
     </table>
   </body>
 </html>

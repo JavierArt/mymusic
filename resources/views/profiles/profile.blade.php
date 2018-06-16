@@ -18,6 +18,9 @@
       <div class="col-2">
         @auth
             <a class="fas fa-user-secret fa-4x text-dark" href="/profile/{{ $idPerf }}/self"></a>
+            @if(Auth::user()->profornot == 0)
+            <a clasa="btn btn-success btn-sm" href="/profile/create"><a>
+            @endif
         @endauth
       </div>
     </div>

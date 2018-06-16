@@ -20,14 +20,18 @@
       <thead>
         <tr>
           <th>Archivo</th>
+          <th>Reproducir</th>
           <th>fecha de creacion</th>
-          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
         @foreach($videos as $archivo)
           <tr>
             <td>{{ $archivo->original_name }}</td>
+            <td> <video width="300" height="200" controls>
+              <source src="/storage/{{ $archivo->fs_name }}">
+              Your browser does not support the video tag.
+            </video> </td>            
             <td>{{ $archivo->created_at->toFormattedDateString() }}</td>
           </tr>
         @endforeach

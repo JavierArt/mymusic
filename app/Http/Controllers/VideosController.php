@@ -20,15 +20,16 @@ class VideosController extends Controller
     public function store(request $request)
     {
         $idPerf=Artistprofile::find(Auth::user()->id)->id;
-        $request->file('video');
         $archivo = $request->file('video');
         $nombreOriginal = $archivo->getClientOriginalName();
         $size = $archivo->getClientSize();
         $mime = $archivo->getMimeType();
         $id=Artistprofile::find($idPerf)->id;
+      
         $request ->validate(['video'=>'mimetypes:video/mp4,video/mpeg,video/ogg,video/webm']);
         if ($request->hasFile('video')) {	
             $fs_name = $request->video->store('');
+            Storage::move($fs_name, 'public/'.$fs_name);
             Video::create([
               'artistprofile_id' => $id,
               'original_name' => $nombreOriginal,

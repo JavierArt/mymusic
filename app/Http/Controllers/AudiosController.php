@@ -28,7 +28,6 @@ class AudiosController extends Controller
   public function store(request $request)
   {
     $idPerf=Artistprofile::find(Auth::user()->id)->id;
-    $request->file('audio');
     $archivo = $request->file('audio');
     $nombreOriginal = $archivo->getClientOriginalName();
     $size = $archivo->getClientSize();
@@ -37,7 +36,8 @@ class AudiosController extends Controller
     
     $request ->validate(['audio'=>'mimetypes:audio/mpeg,audio/mp4,audio/ogg,audio/x-wav']);
     if ($request->hasFile('audio')) {
-          $fs_name = $request->audio->store('');     
+           $fs_name = $request->audio->store('');
+           Storage::move($fs_name, 'public/'.$fs_name);
            Audio::create([
               'artistprofile_id' => $id,
               'original_name' => $nombreOriginal,
@@ -47,11 +47,6 @@ class AudiosController extends Controller
               'directory' => ''
             ]);
          \Session::flash('flash_message','Audio ha sido cargado con exito');
-              return redirect()->back();
-    }
-    else
-    {
-       \Session::flash('flash_message','El archivo debe tener un formato de audio valido');
               return redirect()->back();
     }
   }

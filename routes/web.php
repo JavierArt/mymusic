@@ -24,7 +24,7 @@ Route::get('/profile/create', 'ArtistprofileController@create');
 Route::post('/profile/s', 'ArtistprofileController@store');
 Route::get('/profile/{Perprof}', 'ArtistprofileController@show');
 Route::get('/profile/{Perprof}/edit', 'ArtistprofileController@edit');
-Route::put('/profile/{Perprof}', 'ArtistprofileController@update');//fix
+Route::put('/profile/{Perprof}', 'ArtistprofileController@update');
 Route::get('/profile/{Perprof}/self','ArtistprofileController@own');
 Route::post('/profilepic','ArtistprofileController@updateavatar');
 Route::get('profiles/searchredirect', function(){     

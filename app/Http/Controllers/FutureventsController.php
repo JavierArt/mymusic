@@ -16,7 +16,8 @@ class FutureventsController extends Controller
   
     public function index($id)
     {
-       $eventos = Futurevent::all()->where('artistprofile_id',$id);//agregar fecha posterior a hoy
+       $eventos = Futurevent::all()
+         ->where('artistprofile_id',$id);//agregar fecha posterior a hoy
        return view("eventos.events",compact('eventos'));
     }
 
@@ -35,6 +36,7 @@ class FutureventsController extends Controller
     ]);
     $data = $request->all();
     $data['artistprofile_id'] = $id;
+    dd($data);
     $add_event = new Futurevent($data);
     $add_event->save();
     \Session::flash('flash_message','el evento ha sido creado');

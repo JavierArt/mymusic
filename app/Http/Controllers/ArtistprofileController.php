@@ -31,7 +31,11 @@ class ArtistprofileController extends Controller
     {
       //eager loading
       $profile = Artistprofile::with('User')->paginate(4);
-      if(Auth()->guard()->check()){
+      if(Auth()->guard()->check() && Auth::user()->profornot == 0){
+        $idperf=0;
+        return redirect('/profile/create');
+      }
+      elseif(Auth()->guard()->check()){
         $idPerf=Artistprofile::find(Auth::user()->id)->id;
       }
       else{
@@ -98,8 +102,15 @@ class ArtistprofileController extends Controller
      */
     public function show($Perprof)
     {
+      if(Auth()->guard()->check() && Auth::user()->profornot == 0){
+        $idperf=0;
+        return redirect('/profile/create');
+      }
+      else
+      {
         $Perprof=Artistprofile::find($Perprof);
-        return view("profiles.personalprofile",compact('Perprof'));
+        return view("profiles.personalprofile",compact('Perprof'));        
+      }
     }
 
     /**
@@ -125,7 +136,6 @@ class ArtistprofileController extends Controller
     public function update(Request $request,$id)
     {
       $add_profile = Artistprofile::find($id);
-      $json=json_encode($add_profile);
       $add_profile->description = $request->description;
       $add_profile->bandornot = $request->bandornot;
       $add_profile->musictype = $request->musictype;
