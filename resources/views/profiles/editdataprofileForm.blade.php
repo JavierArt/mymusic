@@ -45,9 +45,8 @@
          {{ Form::label('artistname', 'nombre artistico') }}
         {!! Form::text('artistname', null, ['placeholder' => 'nombre artistico', 'class' => 'form-control']) !!}
       </div>
-        {{ Form::submit('recuperar de la base de datos', array('class' => 'btn btn-dark')) }}
-    {!! Form::close() !!}
         {{ Form::submit('Aceptar', array('class' => 'btn btn-success')) }}
+    {!! Form::close() !!}
   </div>
 </div>
 @endsection

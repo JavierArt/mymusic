@@ -26,7 +26,7 @@ Route::get('/profile/{Perprof}', 'ArtistprofileController@show');
 Route::get('/profile/{Perprof}/edit', 'ArtistprofileController@edit');
 Route::put('/profile/{Perprof}', 'ArtistprofileController@update');
 Route::get('/profile/{Perprof}/self','ArtistprofileController@own');
-Route::post('/profilepic','ArtistprofileController@updateavatar');
+Route::post('/profilepic/','ArtistprofileController@updateavatar');
 Route::get('profiles/searchredirect', function(){     
     /* Nuevo: si el argumento search está vacío regresar a la página anterior */
     if (empty(Request::get('search'))) return redirect()->back();
@@ -49,8 +49,9 @@ Route::resource('video', 'VideosController', ['only' => ['store', 'destroy']]);/
 
 //events
 Route::get('/profile/{Perprof}/events', 'FutureventsController@index');
+Route::get('/profile/{Perprof}/{id}/events', 'FutureventsController@index');
 Route::get('/profile/{Perprof}/events/create','FutureventsController@create');
-Route::post('/profile/{Perprof}/events', 'FutureventsController@store');
+Route::post('/profile/{Perprof}/events/s', 'FutureventsController@store');
 
 //audios
 Route::get('/profile/{Perprof}/audios','AudiosController@audiosfromprofile');

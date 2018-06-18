@@ -92,7 +92,8 @@ class ArtistprofileController extends Controller
     		$Perprof->photo = $filename;
     		$Perprof->save();
       }
-      return view("profiles.personalprofile",compact('Perprof'));
+      return redirect('/profiles/');
+      //return view("profiles.personalprofile",compact('Perprof'));
     }
     /**
      * Display the specified resource.

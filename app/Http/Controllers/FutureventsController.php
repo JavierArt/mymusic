@@ -36,7 +36,6 @@ class FutureventsController extends Controller
     ]);
     $data = $request->all();
     $data['artistprofile_id'] = $id;
-    dd($data);
     $add_event = new Futurevent($data);
     $add_event->save();
     \Session::flash('flash_message','el evento ha sido creado');
