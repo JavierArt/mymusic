@@ -15,11 +15,17 @@
     </div>
   </div>
  @include('layouts.errors')
-  <div class="col-5">  
+ @include('partials.flash')
+  <div class="col-9">  
         {!! Form::open(['url' => '/profile/'. $evprof->id .'/events/s']) !!}
         <div class="form-group">
           {{ Form::label('place', 'lugar') }}
-          {!! Form::text('place', null, ['placeholder' => 'lugar donde sera el evento', 'class' => 'form-control','required']) !!}
+          {!! Form::text('place', null, ['placeholder' => 'nombre del lugar donde sera el evento', 'class' => 'form-control','required']) !!}
+        </div>
+
+        <div class="form-group">
+          {{ Form::label('address', 'domicilio del lugar') }}
+          {!! Form::url('address', null, ['placeholder' => 'domicilio del lugar', 'class' => 'form-control','required']) !!}
         </div>
 
         <div class="form-group">

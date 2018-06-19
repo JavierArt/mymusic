@@ -32,7 +32,7 @@
               <source src="/storage/{{ $archivo->fs_name }}">
               Your browser does not support the video tag.
             </video> </td>            
-            <td>{{ $archivo->created_at->toFormattedDateString() }}</td>
+            <td>{{ $archivo->created_at->format('d M Y') }}</td>
           </tr>
         @endforeach
       </tbody>

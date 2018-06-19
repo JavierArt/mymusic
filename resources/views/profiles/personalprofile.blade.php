@@ -77,16 +77,15 @@
         <div class="col">
         <a href="{{$Perprof->id}}/audios" class="btn btn-outline-primary">audios</a>
         <a href="{{$Perprof->id}}/videos" class="btn btn-outline-secondary">videos</a>
-        <a href="{{$Perprof->id}}/pictures" class="btn btn-outline-info">pictures</a>
-        <a href="{{$Perprof->id}}/events" class="btn btn-outline-danger">eventos</a>
-       </div>
-      </div>
+        <a href="{{$Perprof->id}}/pictures" class="btn btn-outline-info">imagenes</a>
+        <a href="{{$Perprof->id}}/events" class="btn btn-outline-danger">eventos</a>     
       @auth
       @if($Perprof->id == Auth::user()->id)
-      <td><a class="btn btn-warning btn-sm" href="{{ URL::to('profile/' . $Perprof->id . '/edit') }}">editar este perfil</a></td>
+      <a class="btn btn-warning btn-sm" href="{{ URL::to('profile/' . $Perprof->id . '/edit') }}">editar este perfil</a>
       @endif
       @endauth
-
+      </div>
+      </div>
     </div>
   </body>
 </html>

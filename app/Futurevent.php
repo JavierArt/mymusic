@@ -8,10 +8,11 @@ class Futurevent extends Model
 {
     public $timestamps = false;
       protected $fillable = [
-        'artistprofile_id','place', 'date', 'hora'
+        'artistprofile_id','place', 'address', 'date', 'hora'
     ];
     public function profile()
     {
         return $this->belongsTo('App\Artistprofile');
     }
+  protected $dates = ['date'];
 }

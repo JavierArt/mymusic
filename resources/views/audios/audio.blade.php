@@ -28,7 +28,7 @@
         @foreach($audios as $archivo)
           <tr>
             <td>{{ $archivo->original_name}}</td>
-            <td>{{ $archivo->created_at->toFormattedDateString() }}</td>
+            <td>{{ $archivo->created_at->format('d M Y') }}</td>
             <td> <audio controls>
               <source src="{{ URL::asset('/storage/' . $archivo->fs_name) }}">
               Your browser does not support the audio tag.

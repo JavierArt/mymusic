@@ -25,7 +25,7 @@
       <tbody>
         @foreach($pictures as $archivo)
           <tr>
-            <td><img src="/uploads/pictures/{{ $archivo->fs_name }}" alt="imagen"><br>{{ $archivo->created_at->toFormattedDateString() }}</td>
+            <td><img src="/uploads/pictures/{{ $archivo->fs_name }}" alt="imagen"><br>{{ $archivo->created_at->format('d M Y') }}</td>
           </tr>
         @endforeach
       </tbody>

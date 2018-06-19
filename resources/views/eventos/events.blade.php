@@ -21,14 +21,16 @@
               <th scope="col">Lugar</th>
               <th scope="col">Fecha</th>
               <th scope="col">Hora</th>
+              <th scope="col">domicilio (mapa)</th>
             </tr>
           </thead>
         <tbody>
           @foreach($eventos as $event)
           <tr>
             <td>{{ $event->place }}</td>
-            <td>{{ $event->date }}</td>
+            <td>{{ $event->date->format('d M Y') }}</td>
             <td>{{ $event->hora }}</td>
+            <td><a href="{{ $event->address }}" target=_blank>{{ $event->address }}</a></td>
           </tr>
           @endforeach
         </tbody>

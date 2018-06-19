@@ -11,13 +11,13 @@ class FutureventsController extends Controller
    public function __construct()
     {
       $this->middleware('auth')->except(['index', 'show']);
-     
     }
   
     public function index($id)
     {
+      $today=now();
        $eventos = Futurevent::all()
-         ->where('artistprofile_id',$id);//agregar fecha posterior a hoy
+         ->where('artistprofile_id',$id)->where('date','>=',$today);
        return view("eventos.events",compact('eventos'));
     }
 
@@ -29,22 +29,25 @@ class FutureventsController extends Controller
 
     public function store(Request $request,$id)
     {
+      $today=now();
       $request ->validate([
       'place'=>'required',
+      'address'=>'required',
       'date'=>'required',
       'hora'=>'required',
     ]);
     $data = $request->all();
+    if($request->date >= $today){
     $data['artistprofile_id'] = $id;
     $add_event = new Futurevent($data);
     $add_event->save();
     \Session::flash('flash_message','el evento ha sido creado');
     return redirect('/profiles');
     }
-
-    public function show(futurevents $futurevents)
+    else
     {
-        $eventos = Artistprofile::all()->where('artistprofile_id',$id);//histtorial eventos completo
-       return view("eventos.events",compact('eventos'));
+       \Session::flash('flash_message','la fecha debe ser posterior o igual a la fecha actual');
+       return redirect()->back();
+    }
     }
 }
