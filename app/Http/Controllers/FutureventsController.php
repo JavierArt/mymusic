@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Futurevent;
 use App\Artistprofile;
 use Illuminate\Http\Request;
+use DB;
 
 class FutureventsController extends Controller
 {
@@ -17,7 +18,9 @@ class FutureventsController extends Controller
     {
       $today=now();
        $eventos = Futurevent::all()
-         ->where('artistprofile_id',$id)->where('date','>=',$today);
+         ->where('artistprofile_id',$id)->where('date','>=',$today)
+         ->sortBy('date');
+        DB::table('futurevents')->where('date', '<', $today )->delete();
        return view("eventos.events",compact('eventos'));
     }
 

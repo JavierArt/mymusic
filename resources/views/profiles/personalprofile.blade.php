@@ -4,8 +4,9 @@
   <head>
     <title>My profile</title>
     <link rel="stylesheet" href="{{ URL::asset('css/general.css') }}" type="text/css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">  </head>
-  <body background-color: #fff;>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">  
+  </head>
+  <body>
     @include('partials.flash')
     <div class="row">
     <div class="col-sm-4">     
@@ -79,14 +80,14 @@
         <a href="{{$Perprof->id}}/videos" class="btn btn-outline-secondary">videos</a>
         <a href="{{$Perprof->id}}/pictures" class="btn btn-outline-info">imagenes</a>
         <a href="{{$Perprof->id}}/events" class="btn btn-outline-danger">eventos</a>     
-      @auth
+       @auth
       @if($Perprof->id == Auth::user()->id)
-      <a class="btn btn-warning btn-sm" href="{{ URL::to('profile/' . $Perprof->id . '/edit') }}">editar este perfil</a>
+      <a class="btn btn-warning btn-sm" href="{{ URL::to('profile/' . $Perprof->id . '/edit') }}">Editar perfil</a>
       @endif
       @endauth
       </div>
       </div>
-    </div>
+  </div>
   </body>
 </html>
 @endsection

@@ -1,9 +1,9 @@
+              html, body {
+                background-image: url('https://todoimagenesde.com/wp-content/uploads/2015/07/musica.jpg1_.png');
                 font-family: 'Raleway', sans-serif;
                 height: 100vh;
                 margin: 0;
             }
-
-
             .full-height {
                 height: 100vh;
             }
@@ -44,11 +44,11 @@
 
             .m-b-md {
                 margin-bottom: 400px;
-                color: #000000;
+                color: #b3d1ff;
                 font-size: 70px;
             }
           .m-b-md2{
-                color: #000000;
+                color: #b3d1ff;
                 font-size: 70px;
           }
 body {

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <title>Perfiles de musicos</title>
   </head>
-  <body background-color: #fff;>
+  <body>
     @if (count($profile) == 0)
       <h1>no existen perfiles que mostrar</h1>
     @else
@@ -18,9 +18,6 @@
       <div class="col-2">
         @auth
             <a class="fas fa-user-secret fa-4x text-dark" href="/profile/{{ $idPerf }}/self"></a>
-            @if(Auth::user()->profornot == 0)
-            <a clasa="btn btn-success btn-sm" href="/profile/create"><a>
-            @endif
         @endauth
       </div>
     </div>

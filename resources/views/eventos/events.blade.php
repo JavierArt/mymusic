@@ -5,7 +5,7 @@
     <title>Eventos del perfil</title>
     <link rel="stylesheet" href="{{ URL::asset('css/general.css') }}" type="text/css">
   </head>
-  <body background-color: #fff;>
+  <body>
     <h1>
       eventos del perfil
     </h1>
@@ -28,12 +28,12 @@
           @foreach($eventos as $event)
           <tr>
             <td>{{ $event->place }}</td>
-            <td>{{ $event->date->format('d M Y') }}</td>
+            <td>{{ $event->date->formatLocalized('%A %d %B %Y') }}</td>
             <td>{{ $event->hora }}</td>
             <td><a href="{{ $event->address }}" target=_blank>{{ $event->address }}</a></td>
           </tr>
-          @endforeach
         </tbody>
+        @endforeach
         </div>
       </table>   
   </body>

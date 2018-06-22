@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<head>
-  <script type="text/javascript" src="{{ URL::asset('js/populateDB.js') }}"></script>
-</head>
+
 <div class="container">
 
 <div class="row">
