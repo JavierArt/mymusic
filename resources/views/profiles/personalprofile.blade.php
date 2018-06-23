@@ -15,7 +15,7 @@
             <tr>
               <th><img src="/uploads/avatars/{{ $Perprof->photo }}" alt="foto de perfil" style="width:80px; height:80px; float:left; border-radius:50%; margin-right:25px;">
                  @auth
-                 @if($Perprof->id == Auth::user()->id)  
+                 @if($Perprof->user_id == Auth::user()->id)  
                 <h6>Subir foto de perfil</h6>
                   {!! Form::open(['action' => ['ArtistprofileController@updateavatar'], 'files' => 'true']) !!}
                   {!! Form::file('avatar') !!}
@@ -53,7 +53,7 @@
       </div>
       <!--deben de estar autenticados y debe ser su perfil para que aparesca el formulario para subir archivos si no aoarece mensaje-->
       @auth
-      @if($Perprof->id == Auth::user()->id)
+      @if($Perprof->user_id == Auth::user()->id)
      <div class="col-sm-2">
         @include('partials.FormAudio', ['origen_id' => $Perprof->id])
       </div>

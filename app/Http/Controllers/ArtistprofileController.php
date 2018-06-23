@@ -36,7 +36,7 @@ class ArtistprofileController extends Controller
         return redirect('/profile/create');
       }
       elseif(Auth()->guard()->check()){
-        $idPerf=Artistprofile::find(Auth::user()->id)->id;
+        $idPerf=Artistprofile::find(Auth::user()->id)->user_id;
       }
       else{
         $idPerf=0;
@@ -109,7 +109,7 @@ class ArtistprofileController extends Controller
       }
       else
       {
-        $Perprof=Artistprofile::find($Perprof);
+        $Perprof=Artistprofile::find($Perprof) ?? abort(404);;
         return view("profiles.personalprofile",compact('Perprof'));        
       }
     }

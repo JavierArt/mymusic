@@ -52,7 +52,7 @@
               <th>Genero musical</th>
               <th>edad</th>
               @auth
-              @if($prof->id == Auth::user()->id)
+              @if($prof->user_id == Auth::user()->id)
               <th>acciones</th>
               @endif
               @endauth
@@ -66,7 +66,7 @@
             <td>{{ $prof->musictype }}</td>
             <td>{{ $prof->User->age->diffForhumans(null,true) }}</td>
             @auth
-            @if($prof->id == Auth::user()->id)
+            @if($prof->user_id == Auth::user()->id)
             <td><a class="fas fa-edit fa-2x bg-white text-dark" href="{{ URL::to('profile/' . $prof->id . '/edit') }}"></a></td>
             @endif
             @endauth
