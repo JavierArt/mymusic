@@ -11,4 +11,8 @@ class Pictures extends Model
     {
       $this->belongsto('App\Artistprofile');
     }
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }

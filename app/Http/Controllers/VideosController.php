@@ -19,15 +19,15 @@ class VideosController extends Controller
   
     public function store(request $request)
     {
-        $idPerf=Artistprofile::find(Auth::user()->id)->id;
-        $archivo = $request->file('video');
-        $nombreOriginal = $archivo->getClientOriginalName();
-        $size = $archivo->getClientSize();
-        $mime = $archivo->getMimeType();
-        $id=Artistprofile::find($idPerf)->id;
       
         $request ->validate(['video'=>'mimetypes:video/mp4,video/mpeg,video/ogg,video/webm']);
         if ($request->hasFile('video')) {	
+          $idPerf=Artistprofile::find(Auth::user()->id)->id;
+          $archivo = $request->file('video');
+          $nombreOriginal = $archivo->getClientOriginalName();
+          $size = $archivo->getClientSize();
+          $mime = $archivo->getMimeType();
+          $id=Artistprofile::find($idPerf)->id;
             $fs_name = $request->video->store('');
             Storage::move($fs_name, 'public/'.$fs_name);
             Video::create([
@@ -38,8 +38,12 @@ class VideosController extends Controller
               'size' => $size,
               'directory' => ''
             ]);
-        }
        \Session::flash('flash_message','Video a sido cargado con exito');
        return redirect()->back();
+        }
+       else{
+      \Session::flash('flash_message','elige un archivo de video a cargar');
+              return redirect()->back();
+    }
     }
 }

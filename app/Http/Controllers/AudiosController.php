@@ -27,15 +27,15 @@ class AudiosController extends Controller
     
   public function store(request $request)
   {
-    $idPerf=Artistprofile::find(Auth::user()->id)->id;
-    $archivo = $request->file('audio');
-    $nombreOriginal = $archivo->getClientOriginalName();
-    $size = $archivo->getClientSize();
-    $mime = $archivo->getMimeType();
-    $id=Artistprofile::find($idPerf)->id;
     
     $request ->validate(['audio'=>'mimetypes:audio/mpeg,audio/mp4,audio/ogg,audio/x-wav']);
     if ($request->hasFile('audio')) {
+        $idPerf=Artistprofile::find(Auth::user()->id)->id;
+        $archivo = $request->file('audio');
+        $nombreOriginal = $archivo->getClientOriginalName();
+        $size = $archivo->getClientSize();
+        $mime = $archivo->getMimeType();
+        $id=Artistprofile::find($idPerf)->id;
            $fs_name = $request->audio->store('');
            Storage::move($fs_name, 'public/'.$fs_name);
            Audio::create([
@@ -47,6 +47,10 @@ class AudiosController extends Controller
               'directory' => ''
             ]);
          \Session::flash('flash_message','Audio ha sido cargado con exito');
+              return redirect()->back();
+    }
+    else{
+      \Session::flash('flash_message','elige un archivo de audio a cargar');
               return redirect()->back();
     }
   }

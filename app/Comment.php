@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-  public $timestamps = false;
+    protected $fillable = ['body'];
     public function commentable()
     {
         return $this->morphTo();

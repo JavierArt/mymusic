@@ -51,7 +51,7 @@ class ArtistprofileController extends Controller
      */
     public function create()
     {
-         return view('profiles.dataprofileForm');
+      return view('profiles.dataprofileForm');
     }
 
     /**

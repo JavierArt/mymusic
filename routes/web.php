@@ -51,14 +51,20 @@ Route::resource('video', 'VideosController', ['only' => ['store', 'destroy']]);/
 Route::get('/profile/{Perprof}/events', 'FutureventsController@index');
 Route::get('/profile/{Perprof}/{id}/events', 'FutureventsController@index');
 Route::get('/profile/{Perprof}/events/create','FutureventsController@create');
+Route::get('/profile/{Perprof}/{id}/events/create','FutureventsController@create');
 Route::post('/profile/{Perprof}/events/s', 'FutureventsController@store');
 
 //audios
 Route::get('/profile/{Perprof}/audios','AudiosController@audiosfromprofile');
 Route::get('/profile/{Perprof}/{id}/audios','AudiosController@audiosfromprofile');
-Route::resource('audios', 'AudiosController', ['only' => ['store', 'destroy']]);//fix destroy
+Route::resource('audios', 'AudiosController', ['only' => ['store']]);
 
 //pictures
 Route::get('/profile/{Perprof}/pictures','PicturesController@picsfromprofile');
 Route::get('/profile/{Perprof}/{id}/pictures','PicturesController@picsfromprofile');
-Route::resource('pictures', 'PicturesController', ['only' => ['store', 'destroy']]);//fix destroy
+Route::resource('pictures', 'PicturesController', ['only' => ['store']]);
+
+//comments
+Route::get('/profile/{id}/comment/create','CommentsController@create');
+Route::post('/profile/{id}/comment/s','CommentsController@store');
+Route::get('/profile/{id}/comments','CommentsController@index');

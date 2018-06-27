@@ -26,16 +26,16 @@ class PicturesController extends Controller
   
   public function store(request $request)
   {
-    $idPerf=Artistprofile::find(Auth::user()->id)->id;
-    $archivo = $request->file('picture');
-    $fs_name = time() . '.' . $archivo->getClientOriginalExtension();
-    $nombreOriginal = $archivo->getClientOriginalName();
-    $size = $archivo->getClientSize();
-    $mime = $archivo->getMimeType();
-    $id=Artistprofile::find($idPerf)->id;
     
     $request ->validate(['picture'=>'mimetypes:image/jpeg,image/png']);
     if ($request->hasFile('picture')) {
+      $idPerf=Artistprofile::find(Auth::user()->id)->id;
+      $archivo = $request->file('picture');
+      $fs_name = time() . '.' . $archivo->getClientOriginalExtension();
+      $nombreOriginal = $archivo->getClientOriginalName();
+      $size = $archivo->getClientSize();
+      $mime = $archivo->getMimeType();
+      $id=Artistprofile::find($idPerf)->id;
         Image::make($archivo)->resize(200, 200)->save( public_path('/uploads/pictures/' . $fs_name ) );
            Pictures::create([
               'artistprofile_id' => $id,
@@ -46,6 +46,10 @@ class PicturesController extends Controller
               'directory' => ''
             ]);
          \Session::flash('flash_message','Imagen cargada con exito');
+              return redirect()->back();
+    }
+     else{
+      \Session::flash('flash_message','elige una imagen a cargar');
               return redirect()->back();
     }
   }
