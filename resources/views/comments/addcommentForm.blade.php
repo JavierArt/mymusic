@@ -14,13 +14,11 @@
       </h2>
     </div>
   </div>
- @include('layouts.errors')
- @include('partials.flash')
-  <div class="col-8">
+  <div class="col-7">
         {!! Form::open(['url' => '/profile/'. $id .'/comment/s']) !!}
         <div class="form-group">
           {{ Form::label('body', 'comentario') }}
-          {!! Form::textarea('body', null, ['placeholder' => 'comentario', 'class' => 'form-control','required']) !!}
+          {!! Form::text('body', null, ['placeholder' => 'comentario', 'class' => 'form-control','required']) !!}
           {!! Form::hidden('user', $user) !!}
         </div>
 

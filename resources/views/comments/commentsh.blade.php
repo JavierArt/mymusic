@@ -6,11 +6,6 @@
     <link rel="stylesheet" href="{{ URL::asset('css/general.css') }}" type="text/css">
   </head>
   <body>
-    @if(Session::has('flash_message'))
-      <div class="alert alert-success">
-        {{Session::get('flash_message')}}
-    </div>
-    @endif
     <div class="col-md-4">
           @if(count($comments) == 0)
            <h1>No hay comentarios</h1>
@@ -33,8 +28,8 @@
               </tbody>
         @endforeach
         @endif
-        </div>
       </table>   
+        </div>
   </body>
 </html>
 @endsection

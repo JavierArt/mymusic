@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+<head>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.2/awesomplete.css">
+</head>
 <div class="container">
 
 <div class="row">
@@ -25,8 +28,11 @@
       </div>
     
       <div class="form-group">
-        {{ Form::label('musictype', 'genero musical') }}
-        {!! Form::text('musictype', null, ['placeholder' => 'que Genero tocas?', 'class' => 'form-control', 'required']) !!}
+        {{ Form::label('musictype', 'genero musical:') }}
+        <input type="text", class="form-control awesomplete" name="musictype" placeholder="Que genero tocas" data-list ="rock,pop,reggaeton,mariachi,R&B,mariachi,disco,dance,
+                                                                                                        electronica,blues,country,heavy metal,hip hop,
+                                 jazz,indie,punk,rap,reggae,salsa,cumbia,tango,ballenato,gospel,folk,funk,merengue,rhythm and blues,son,
+                                 tango,ballenato,variado",required >
       </div>
       
       <div class="form-group">
@@ -48,4 +54,6 @@
     {!! Form::close() !!}
   </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.2/awesomplete.js"></script>
+
 @endsection

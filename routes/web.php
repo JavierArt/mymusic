@@ -68,3 +68,6 @@ Route::resource('pictures', 'PicturesController', ['only' => ['store']]);
 Route::get('/profile/{id}/comment/create','CommentsController@create');
 Route::post('/profile/{id}/comment/s','CommentsController@store');
 Route::get('/profile/{id}/comments','CommentsController@index');
+
+//mapa
+Route::get('/map','ArtistprofileController@mapa');

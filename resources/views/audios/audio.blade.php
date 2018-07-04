@@ -12,7 +12,7 @@
         {{Session::get('flash_message')}}
     </div>
     @endif
-    <h1>
+    <h1 class="caja">
       audios del perfil
     </h1>
     @if(count($audios) == 0)
@@ -27,6 +27,7 @@
             <th>Archivo</th>
             <th>fecha de creacion</th>
             <th>Reproducir</th>
+            <th>Comentarios</th>
           </tr>
         </thead>
         <tbody>

@@ -18,7 +18,7 @@ class ArtistprofileController extends Controller
      */
     public function __construct()
     {
-      $this->middleware('auth')->except(['index', 'show','search','mayorfirst','bandas','solistas','DJS']);
+      $this->middleware('auth')->except(['index', 'show','search','mayorfirst','bandas','solistas','DJS','mapa']);
       $this->middleware('checkDprofile')->only(['create','store']);
     }
   
@@ -239,4 +239,9 @@ class ArtistprofileController extends Controller
        $Perprof=Artistprofile::find(Auth::user()->id);
        return view("profiles.personalprofile",compact('Perprof'));
     }
+    public function mapa()
+    {
+      return view('profiles.mapa');
+    }
+  
 }

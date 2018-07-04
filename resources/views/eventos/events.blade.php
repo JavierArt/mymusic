@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ URL::asset('css/general.css') }}" type="text/css">
   </head>
   <body>
-    <h1>
+    <h1 class="caja">
       eventos del perfil
     </h1>
     @if(Session::has('flash_message'))
@@ -14,7 +14,8 @@
         {{Session::get('flash_message')}}
     </div>
     @endif
-    <div class="col-md-8">
+    <div class="row">
+       <div class="col-7">
       <table class="table">
           <thead>
             <tr>
@@ -34,8 +35,10 @@
           </tr>
         </tbody>
         @endforeach
+        </table>
         </div>
-      </table>   
+        <div class="cover col-5"></div> 
+    </div>
   </body>
 </html>
 @endsection

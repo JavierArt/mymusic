@@ -6,13 +6,12 @@
     <link rel="stylesheet" href="{{ URL::asset('css/general.css') }}" type="text/css">
   </head>
   <body>
-   
     @if(Session::has('flash_message'))
       <div class="alert alert-success">
         {{Session::get('flash_message')}}
     </div>
     @endif
-    <h1>
+    <h1 class="caja">
       videos del perfil
     </h1>
     @if(count($videos)==0)
@@ -35,7 +34,7 @@
               <td>{{ $archivo->original_name }}</td>
               <td> <video width="300" height="200" controls>
                 <source src="/storage/{{ $archivo->fs_name }}">
-                Your browser does not support the video tag.
+                tu navegador no soporta la etiqueta de video.
               </video> </td>            
               <td>{{ $archivo->created_at->format('d M Y') }}</td>
               <td><a href="/profile/{{ $archivo->id }}/comment/create" class="btn btn-success">añadir comentario</a></td>

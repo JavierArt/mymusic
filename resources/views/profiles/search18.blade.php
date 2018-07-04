@@ -2,7 +2,7 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ URL::asset('css/general.css') }}" type="text/css">
-<h1>mayores de 18 años primero</h1>
+<h1 class="caja">mayores de 18 años primero</h1>
 @if (isset($message))
 <div class='bg-warning' style='padding: 20px'>
     {{$message}}

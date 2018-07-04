@@ -11,7 +11,7 @@
         {{Session::get('flash_message')}}
     </div>
     @endif
-    <h1>
+    <h1 class="caja">
       Imagenes del perfil
     </h1>
     @if(count($pictures)==0)

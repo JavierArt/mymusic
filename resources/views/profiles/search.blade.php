@@ -2,7 +2,7 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ URL::asset('css/general.css') }}" type="text/css">
-<h1>Resultado de la búsqueda: {{ $search }}</h1>
+<h1 class="caja">Resultado de la búsqueda: {{ $search }}</h1>
 @if (isset($message))
 <div class='bg-warning' style='padding: 20px'>
     {{$message}}
