@@ -31,6 +31,9 @@
               <td>{{ $Perprof->artistname}}</td>
             </tr>
             <tr>
+              <td>{{ $Perprof->ciudad }},{{ $Perprof->estado }},{{ $Perprof->pais}}</td>
+            </tr>
+            <tr>
               <td>{{ $Perprof->bandornot}}</td>
             </tr>
             <tr>

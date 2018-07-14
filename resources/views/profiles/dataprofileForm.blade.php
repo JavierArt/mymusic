@@ -26,6 +26,24 @@
          <br>
          {{!! Form::select('bandornot', ['Banda' => 'banda', 'Solista' => 'solista', 'Dj' => 'Dj'], 'Banda') !!}}
       </div>
+
+      <div class="form-group">
+         {{ Form::label('pais', 'Pais de origen') }}
+         <br>
+         {!! Form::text('pais',null,['placeholder'=>'De que pais eres','class'=>'form-control','required'])  !!}
+      </div>
+
+      <div class="form-group">
+         {{ Form::label('estado', 'Estado de origen') }}
+         <br>
+         {!! Form::text('estado',null,['placeholder'=>'De que estado eres','class'=>'form-control','required'])  !!}
+      </div>
+      
+      <div class="form-group">
+         {{ Form::label('ciudad', 'Ciudad de origen') }}
+         <br>
+         {!! Form::text('ciudad',null,['placeholder'=>'De que ciudad eres','class'=>'form-control','required']) !!}
+      </div>
     
       <div class="form-group">
         {{ Form::label('musictype', 'genero musical:') }}

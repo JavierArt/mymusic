@@ -31,7 +31,7 @@ class Artistprofile extends Model
       return $this->hasMany('App\Pictures');
     }
     protected $fillable = [
-        'user_id', 'photo', 'bandornot', 'description', 'musictype','webpage','contactemail','artistname'
+        'user_id', 'photo', 'bandornot','pais','ciudad','estado','description', 'musictype','webpage','contactemail','artistname'
     ];
   
     //Mutator

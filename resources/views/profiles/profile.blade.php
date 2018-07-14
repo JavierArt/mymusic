@@ -53,6 +53,7 @@
               <th>Nombre de artista</th>
               <th>banda, solista o Dj</th>
               <th>Genero musical</th>
+              <th>origen</th>
               <th>edad</th>
               @auth
               @if($prof->user_id == Auth::user()->id)
@@ -67,6 +68,7 @@
             <td><a href="/profile/{{ $prof->id }}">{{ $prof->artistname }}</a></td>
             <td>{{ $prof->bandornot }}</td>
             <td>{{ $prof->musictype }}</td>
+            <td>{{ $prof->ciudad }},{{ $prof->estado }},{{ $prof->pais}}</td>
             <td>{{ $prof->User->age->diffForhumans(null,true) }}</td>
             @auth
             @if($prof->user_id == Auth::user()->id)

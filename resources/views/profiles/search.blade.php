@@ -19,6 +19,7 @@
                   <th scope="col">Nombre de artista</th>
                   <th scope="col">Genero musical</th>
                   <th scope="col">banda o solista</th>
+                  <th scope="col">origen</th>
                   <th scope="col">edad</th>
                 </tr>
               </thead>
@@ -28,6 +29,7 @@
                 <td><a href="/profile/{{ $prof->id }}">{{ $prof->artistname }}</a></td>
                 <td>{{ $prof->bandornot }}</td>
                 <td>{{ $prof->musictype }}</td>
+                <td>{{ $prof->ciudad }},{{ $prof->estado }},{{ $prof->pais}}</td>
                 <td>{{ $prof->User->age->diffForhumans(null,true) }}</td>
               </tr>
             </tbody>

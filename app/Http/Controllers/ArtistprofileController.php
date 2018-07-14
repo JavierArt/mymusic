@@ -67,6 +67,9 @@ class ArtistprofileController extends Controller
       $request ->validate([
       'bandornot'=>'required',
       'description'=>'required',
+      'pais'=>'required',
+      'estado'=>'required',
+      'ciudad'=>'required',
       'musictype'=>'required',
       'contactemail'=>'required|email',
       'artistname'=>'required'

@@ -6,7 +6,7 @@
 </head>
 <body>
     <div id="mapa"></div>
-    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyA6QQ9aMWWum0lq1jtSIhi7Tc5Jsn9xsZc"></script> 
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyB4gnLvAMwUnEPjLLTxUf4AS-vKY2m2mWI"></script> 
     <script>
       google.maps.event.addDomListener(window,"load",function(){
         var mapElement = document.getElementById('mapa')
