@@ -21,7 +21,7 @@ class AudiosController extends Controller
   public function audiosfromprofile($id)
   {
      $audios = Audio::all()->where('artistprofile_id',$id);
-     return view("audios.audio",compact('audios','url'));
+     return view("audios.audio",compact('audios'));
   }
 
     

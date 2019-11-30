@@ -10,7 +10,7 @@
     }
     .centleft
     {
-      margin-left:auto;
+      margin-left:190px;
     }
     .center{
       text-align:center;      
@@ -32,7 +32,7 @@
   
   <div class="center">
   <h1 >Encontraste a un monstruo amante de la musica</h1>
-  <p>Ademas encontraste un error 404, que significa que la pagina no existe</p>
+  <p>Ademas encontraste un error 404</p>
   <p>regresa antes de que rompas el balance del internet</p>
   <a href="/" class="btn btn-primary btn-lg">regresar a la pagina de inicio</a>
   </div>
